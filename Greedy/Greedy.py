@@ -1,11 +1,11 @@
-test_intervalls = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
+test_intervals = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
 
 # O(n log n)
-def intervall_scheduling(intervalls: list) -> list:
-    intervalls.sort(key = lambda x: x[1]) # sort by endtime
+def interval_scheduling(intervals: list) -> list:
+    intervals.sort(key = lambda x: x[1]) # sort by endtime
     timeline = []
 
-    for next_i in intervalls:
+    for next_i in intervals:
         if timeline == []:
             timeline.append(next_i)
         elif next_i[0] >= timeline[-1][1]: # no overlapping  
@@ -14,11 +14,11 @@ def intervall_scheduling(intervalls: list) -> list:
     return timeline
 
 # O(n log n) ? worst case would be n²
-def intervall_partitioning(intervalls: list, check=False) -> list:
-    intervalls.sort(key = lambda x: x[1]) # sort by endtime
+def interval_partitioning(intervals: list, check=False) -> list:
+    intervals.sort(key = lambda x: x[1]) # sort by endtime
     timelines = []
 
-    for next_i in intervalls:
+    for next_i in intervals:
         if timelines == []:
             timelines.append([next_i])
         else:
@@ -31,17 +31,17 @@ def intervall_partitioning(intervalls: list, check=False) -> list:
             if not appended: # create a new timeline
                 timelines.append([next_i])
 
-    if check and len(timelines) != max_overlap(intervalls): # check correctness
+    if check and len(timelines) != max_overlap(intervals): # check correctness
         print("Something doesn't work like it's supposed to")
 
     return timelines
 
 # O(n)
-def max_overlap(intervalls: list):
+def max_overlap(intervals: list):
     max_overlap = 0
-    for i in intervalls:
+    for i in intervals:
         overlap = 0
-        for j in intervalls:
+        for j in intervals:
             if i[0] < j[1] or j[0] < i[1] : # overlapping
                 overlap += 1
         
