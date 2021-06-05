@@ -36,7 +36,7 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
     return timelines
 
-# O(n)
+# O(n²)
 def max_overlap(intervals: list):
     max_overlap = 0
     for i in intervals:
@@ -49,3 +49,19 @@ def max_overlap(intervals: list):
             max_overlap = overlap
     
     return max_overlap
+
+test_intervals_deadline = [(1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
+
+# O(n log n), only first line is different to interval scheduling
+def interval_lateness(intervals: list, check=False) -> list:
+    intervals.sort(key = lambda x: x[2]) # sort by deadline
+    timeline = []
+
+    for next_i in intervals:
+        if timeline == []:
+            timeline.append(next_i)
+        elif next_i[0] >= timeline[-1][1]: # no overlapping  
+            timeline.append(next_i)
+    
+    return timeline
+
