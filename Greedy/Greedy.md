@@ -32,6 +32,35 @@ between deadline and end.
 **Solution :**
 Choose the next interval by the earliest remaining deadline.
 
+### Graphs <hr />
+
+#### Dijkstra
+
+**Problem :**
+In a directed Graph, where edges have weights/lengths, find the shortest path 
+(minimizing the summed up length/weight) between two vertices s and t.
+
+**Solution :**
+Use BFS (see below) to calculate all distances.
+
+BFS means visiting nodes layer by layer 
+(so all neighbourse of s, then all neighbours of those etc.)
+
+#### Minimal Span Trees (MST)
+
+**Problem :**
+In an undirected graph with weighted edges, find the minimal span tree 
+(a tree that contains all nodes of the original graph), with minimal 
+meaning to minimize the sum of weights of used edges.
+
+**Solution :**
+Kruskal :
+Choose the edge with the least weight next, whilst not creating circles
+
+Prim :
+Start at some node and from that one forward always choose the connected edge 
+with the least weight.
+
 #### Huffman Codes
 
 **Problem :**
