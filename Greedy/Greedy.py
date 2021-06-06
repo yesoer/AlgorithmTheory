@@ -132,17 +132,20 @@ def graph_from_list(vertices: list, edges:list, directed=False) -> dict:
 # O(|V| + |E|) ?
 def dijkstra(graph: dict, start, end) -> list:
     cost_s_t = { x:None if x != start else 0 for x in graph} # paths from start to each other t with t being the keys
-    queue = [ start ]
+    queue = [ start ] # will hold the vertices at current and next level
     
     while queue != []:
+        # pop next element 
         curr = queue[0]
         queue = queue[1:]
 
+        # see if one of edges from this point onwards would be beneficial for the target
+        # if so the target now has a new value and should be evaluated
         for e in graph[curr]:
-            if not cost_s_t[e[1]]: # first
+            if not cost_s_t[e[1]]: # first value for this vertex
                 cost_s_t[e[1]] = e[2] if not cost_s_t[e[0]] else cost_s_t[e[0]] + e[2]
                 queue.append(e[1])
-            elif cost_s_t[e[1]] > cost_s_t[e[0]] + e[2] : 
+            elif cost_s_t[e[1]] > cost_s_t[e[0]] + e[2] : # better than old value
                 cost_s_t[e[1]] =  cost_s_t[e[0]] + e[2] 
                 queue.append(e[1])
  
