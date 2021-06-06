@@ -113,3 +113,38 @@ def insert_sort(l: list, elem, key=None):
       
     l = l[:index] + [elem] + l[index:] # insert
     return l
+
+# edges : start, end, weight
+test_edges = [ (1, 2, 0.5), (2, 4, 5), (2, 3, 2), (3, 5, 1), (1, 5, 10) ]
+test_vertices = [ 1, 2, 3, 4, 5 ]
+
+# O(n)
+def graph_from_list(vertices: list, edges:list, directed=False) -> dict:
+    v_e_map = { v:[] for v in vertices }
+
+    for e in edges:
+        v_e_map[e[0]].append(e)
+        if not directed:
+            v_e_map[e[1]].append(e)
+    
+    return v_e_map
+
+# O(|V| + |E|) ?
+def dijkstra(graph: dict, start, end) -> list:
+    cost_s_t = { x:None if x != start else 0 for x in graph} # paths from start to each other t with t being the keys
+    queue = [ start ]
+    
+    while queue != []:
+        curr = queue[0]
+        queue = queue[1:]
+
+        for e in graph[curr]:
+            if not cost_s_t[e[1]]: # first
+                cost_s_t[e[1]] = e[2] if not cost_s_t[e[0]] else cost_s_t[e[0]] + e[2]
+                queue.append(e[1])
+            elif cost_s_t[e[1]] > cost_s_t[e[0]] + e[2] : 
+                cost_s_t[e[1]] =  cost_s_t[e[0]] + e[2] 
+                queue.append(e[1])
+ 
+    return cost_s_t[end]
+
