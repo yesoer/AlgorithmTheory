@@ -151,3 +151,50 @@ def dijkstra(graph: dict, start, end) -> list:
  
     return cost_s_t[end]
 
+
+# 'in' has O(n), use dicts for O(1)
+# O(?)
+def mst_kruskal(vertices: list, edges:list) -> list:
+    edges.sort(key=lambda x: x[2]) # sort by weight
+    v_v_map = [] # list of connections
+    reduced_edges = [] # list of not connected parts of the tree (=components)
+
+    for e in edges:
+        # if all vertices are in the new tree and connected, break
+        connected = len(v_v_map) == 1
+        complete = connected and len(v_v_map[0]) == len(vertices)
+        if complete :
+            break
+
+        creates_circle = False
+        e0_in = None
+        e1_in = None
+
+        # when this loop finishes we know which component(s) e connects or is connected to
+        # and whether it's adding creates a circle
+        for i in range(len(v_v_map)):
+            if e[0] in v_v_map[i] and e[1] in v_v_map[i]: # no circle  
+                creates_circle = True 
+                break
+            if e[0] in v_v_map[i]: # get connected components
+                e0_in = i            # won't get here twice
+            if e[1] in v_v_map[i]:
+                e1_in = i            # won't get here twice
+        
+        # print("e0_in ", e0_in, " e1_in ", e1_in, " creates_circle ", creates_circle)
+        if not creates_circle:
+            reduced_edges.append(e)
+
+            # update connections
+            if not e0_in and not e1_in:
+                v_v_map.append([e[0], e[1]])                  # add the new component
+            elif e0_in != None and e1_in != None:
+                v_v_map[e0_in] = v_v_map[e0_in] + v_v_map[e1_in]    # connect components a and b in a
+                v_v_map = v_v_map[:e1_in] + v_v_map[e1_in+1:] # remove b
+            elif e0_in != None:
+                v_v_map[e0_in].append(e[1])
+            elif e1_in != None:
+                v_v_map[e1_in].append(e[0])
+
+    return reduced_edges
+
