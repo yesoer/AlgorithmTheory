@@ -215,3 +215,48 @@ def mst_kruskal(vertices: list, edges:list) -> list:
 
     return reduced_edges
 
+# O(?)
+def mst_prim(graph: dict) -> list:
+    included_vertices = []
+    nonincluded_vertices = list(graph.keys())
+    reduced_edges = []
+
+    # choose starting vertex ()which doesn't matter
+    included_vertices = [ nonincluded_vertices[0] ]
+    added_vertex = nonincluded_vertices[0]
+    nonincluded_vertices = nonincluded_vertices[1:]
+    possible_edges = []
+    while nonincluded_vertices != []: 
+        
+        # which are new possible edges :
+        # old ones and for newly connected x, E(x, y) or (y, x)
+        # (store position of y at index 3 after weight)
+        # cannot create circle
+        for e in graph[added_vertex]:
+            e0_in = e[0] in included_vertices
+
+            if e0_in:
+                e += (1,)
+                possible_edges = insert_sort(possible_edges, e, key=2)
+            else:
+                e += (0,)
+                possible_edges = insert_sort(possible_edges, e, key=2)
+        
+        # remove lightest edges that create circles
+        creates_circle = lambda x, y : x in included_vertices and possible_edges[0][1] in included_vertices
+        while creates_circle(possible_edges[0][0], possible_edges[0][1]) : # don't add circle
+            possible_edges = possible_edges[1:]                                        
+            continue
+        
+        chosen = possible_edges[0] # choose "lightest" edge next
+        reduced_edges.append(chosen)           
+        
+        new_v = chosen[chosen[3]]
+        included_vertices.append(new_v)    # target of lightest edge is now visited 
+        nonincluded_vertices.remove(new_v) 
+        added_vertex = new_v
+
+        possible_edges = possible_edges[1:]
+
+    return reduced_edges
+
