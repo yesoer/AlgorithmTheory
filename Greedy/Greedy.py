@@ -1,3 +1,7 @@
+############
+# Intervals
+############
+
 test_intervals = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
 
 # O(n log n)
@@ -36,6 +40,7 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
     return timelines
 
+# Helper
 # O(n²)
 def max_overlap(intervals: list):
     max_overlap = 0
@@ -65,8 +70,14 @@ def interval_lateness(intervals: list, check=False) -> list:
     
     return timeline
 
+
+############
+# Frequencies
+############
+
 test_frequencies = [('m', 2/11), ('i', 4/11), ('s', 4/11), ('p', 1/11)]
 
+# Helper
 def huffman_wrapper(frequencies: list) -> dict:
     frequencies.sort(key = lambda x: x[1]) # sort by frequency
     frequencies_d = {f[0]:"" for f in frequencies} # key:value , char:empty string
@@ -100,6 +111,7 @@ def huffman_code(frequencies_l: list, frequencies_d) -> dict:
 
     return huffman_code(new_frequencies, frequencies_d)
 
+# Helper
 # O(n)
 def insert_sort(l: list, elem, key=None):
     index = 0
@@ -114,10 +126,16 @@ def insert_sort(l: list, elem, key=None):
     l = l[:index] + [elem] + l[index:] # insert
     return l
 
+
+############
+# Graphs
+############
+
 # edges : start, end, weight
 test_edges = [ (1, 2, 0.5), (2, 4, 5), (2, 3, 2), (3, 5, 1), (1, 5, 10) ]
 test_vertices = [ 1, 2, 3, 4, 5 ]
 
+# Helper
 # O(n)
 def graph_from_list(vertices: list, edges:list, directed=False) -> dict:
     v_e_map = { v:[] for v in vertices }
@@ -150,7 +168,6 @@ def dijkstra(graph: dict, start, end) -> list:
                 queue.append(e[1])
  
     return cost_s_t[end]
-
 
 # 'in' has O(n), use dicts for O(1)
 # O(?)
