@@ -113,17 +113,18 @@ def huffman_code(frequencies_l: list, frequencies_d) -> dict:
 
 # Helper
 # O(n)
-def insert_sort(l: list, elem, key=None):
-    index = 0
-    for i in range(len(l)): # find insert pos
+def insert_sort(l: list, elem, key=None, order=lambda x, y: x > y):
+    i = 0
+    while i < len(l): # find insert pos
         list_i_val = l[i] if not key else l[i][key]
         elem_val = elem if not key else elem[key]
 
-        if list_i_val > elem_val:
-            index = i
+        if order(list_i_val, elem_val):
             break
-      
-    l = l[:index] + [elem] + l[index:] # insert
+
+        i += 1
+    
+    l = l[:i] + [elem] + l[i:] # insert
     return l
 
 
