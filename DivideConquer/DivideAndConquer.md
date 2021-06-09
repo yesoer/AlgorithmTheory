@@ -52,6 +52,7 @@ y coordinate.
 That way a point has to only be compared to the nearest quadrants.
 Those can at most inhabit 6 points (if their were more, d were smaller). 
 
+runs in **O(n (log n)²).**
 #### Matrix Multiplication <hr />
 
 **Problem :**
