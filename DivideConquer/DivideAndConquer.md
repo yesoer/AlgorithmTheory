@@ -59,6 +59,17 @@ runs in **O(n (log n)²).**
 Multiply two n*n matrices.
 
 **Solution :**
+- Divide matrices A and B in 4 sub-matrices of size n/2 x n/2 as shown in the below diagram
+- Calculate following values recursively. ae + bg, af + bh, ce + dg and cf + dh.
+```
+[a , b]   [e , f]   [a*e + b*g , a*f + b*h]
+[c , d] x [g , h] = [c*e + d*g , c*f + d*h]
+```
+Where a, b, c, ... are of size n/2 x n/2.
+The result can be calculated in **O(n³).**
+Which is the same as a naive solution using three loops.
+Hence it's not that interesting to me and
+not yet included in the code.
 
 #### Fast Fourier Transformation (FFT) <hr />
 
