@@ -73,7 +73,7 @@ def dist(p1: tuple, p2: tuple) -> float:
     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
 
 def stripClosest(strip, size, d) -> float:
-     # Initialize the minimum distance as d
+     # minimum distance as d
     min_val = d
     
     # Pick all points one by one and
