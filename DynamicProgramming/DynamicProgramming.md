@@ -50,7 +50,7 @@ But in the code you wil also need to implement a continue for the loop
 in case w_i is larger than the remaing w, so it can't go negative.
 The runtime **O(n * W)** is proportional to the table size and is in NP !.
 
-#### Longest Common SUbsequence
+#### Longest Common Subsequence
 
 Works as a similarity indicator between strings.
 **Define :**
