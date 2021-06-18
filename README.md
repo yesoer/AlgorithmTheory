@@ -1,5 +1,9 @@
 ### Algorithm Theory <hr />
 
+#### About this project
+This is supposed to be a place where I can learn about algorithms,
+document this knowledge and test my understanding by implementing them.
+
 #### In this project
 
 1. **Greedy Algorithms**
