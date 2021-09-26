@@ -322,3 +322,18 @@ def print_intervals(intervals):
     last_line += "   time steps"
 
     print(last_line)
+
+
+def print_graphs(vertices, edges):
+    """Pretty view for graphs"""
+    import graphviz
+
+    dot = graphviz.Digraph()
+
+    for n in vertices:
+        dot.node(str(n))
+
+    for e in edges:
+        dot.edge(str(e[0]), str(e[1]), label=str(e[2]))
+
+    dot.render('./graph.gv', view=True)
