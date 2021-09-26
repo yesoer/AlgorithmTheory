@@ -28,12 +28,13 @@ def interval_partitioning(intervals: list, check=False) -> list:
         if timelines == []:
             timelines.append([next_i])
         else:
+            appended = False
             for t in range(
                     len(timelines)):  # can any existing timeline "run" this
-                appended = False
-                if next_i[0] >= timelines[t][-1][1]:  # no overlapping
+                if next_i[0] > timelines[t][-1][1]:  # no overlapping
                     timelines[t].append(next_i)
                     appended = True
+                    break
 
             if not appended:  # create a new timeline
                 timelines.append([next_i])
