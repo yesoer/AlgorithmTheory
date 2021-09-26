@@ -9,6 +9,10 @@ class Greedy_test(unittest.TestCase):
     def setUp(self):
         ...
 
+    ############
+    # Intervals
+    ############
+
     def test_interval_scheduling(self):
         cases = [([(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)], [(0, 2), (3, 6)])]
         self.run_cases(cases, Greedy.interval_scheduling)
@@ -27,6 +31,14 @@ class Greedy_test(unittest.TestCase):
             (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)], [(0, 2, 3), (3, 6, 6)])]
         self.run_cases(cases, Greedy.interval_lateness)
 
+    #############
+    # Frequencies
+    #############
+
+    def test_huffman_wrapper(self):
+        cases = [([('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)], {'p': '011', 'm': '010', 'i': '00', 's': '1'})]
+        self.run_cases(cases, Greedy.huffman_wrapper)
+        print_something(self)
     def run_cases(self, cases, to_test):
         # a case is a tuple (input, expected result)
         for _input, expected in cases:
