@@ -47,10 +47,11 @@ def interval_partitioning(intervals: list, check=False) -> list:
 def max_overlap(intervals: list):
     """Helper running in O(n²)"""
     max_overlap = 0
-    for i in intervals:
+    max_interval_end = max(intervals, key=lambda x: x[1])[1]
+    for t in range(max_interval_end):
         overlap = 0
-        for j in intervals:
-            if i[0] < j[1] or j[0] < i[1]:  # overlapping
+        for i in intervals:
+            if t >= i[0] and t <= i[1]:
                 overlap += 1
 
         if max(overlap, max_overlap) == overlap:

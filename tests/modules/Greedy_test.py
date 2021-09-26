@@ -19,7 +19,7 @@ class Greedy_test(unittest.TestCase):
         self.run_cases(cases, Greedy.interval_partitioning)
 
     def test_max_overlap(self):
-        cases = [([(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)], 5)]
+        cases = [([(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)], 3)]
         self.run_cases(cases, Greedy.max_overlap)
 
     def test_interval_lateness(self):
