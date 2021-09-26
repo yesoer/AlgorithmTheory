@@ -31,7 +31,21 @@ document this knowledge and test my understanding by implementing them.
 - Maximum Flow (Ford-Fulkerson)
 - Circulation in flow graphs
 
-5. **The so called "Challenges"**
-Some more specific problems that have been solved by adapting some of
-the mentioned Algorithms. They're good challenges but might also help
-thinking out of the box.
+#### Structure
+
+`src` contains the modules for the various types of algorithms.
+Each of the modules is accompanied by a corresponding `.md` file with short explanations and examples on the algorithms. (very much WIP)
+
+`tests`, as you might've guessed, contains the testsuite.
+ For each module in `src` there is a testing module in `tests/modules`.
+ Furthermore there is a `Context.py` to import the src modules.
+ This part of the structure can probably be improved a lot.
+
+#### Tools
+
+**Formatting :**
+
+autopep8, which can be installed from pip with `pip install autopep8`.
+
+run from the root of the directory with:
+`autopep8 --in-place --aggressive --recursive .`
