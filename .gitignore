@@ -1,1 +1,7 @@
+# Python related
 *.pyc
+
+# Graphviz related
+graph.gv
+graph.gv.pdf
+.~lock.graph.gv.pdf#

@@ -49,3 +49,7 @@ autopep8, which can be installed from pip with `pip install autopep8`.
 
 run from the root of the directory with:
 `autopep8 --in-place --aggressive --recursive .`
+
+**Printing Graphs :**
+
+graphviz, which can be installed with `pip install graphviz`.

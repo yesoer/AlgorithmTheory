@@ -4,25 +4,23 @@
 
 test_intervals = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
 
-# O(n log n)
-
 
 def interval_scheduling(intervals: list) -> list:
+    """Interval Scheduling in O(n log n)"""
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     timeline = []
 
     for next_i in intervals:
         if timeline == []:
             timeline.append(next_i)
-        elif next_i[0] >= timeline[-1][1]:  # no overlapping
+        elif next_i[0] > timeline[-1][1]:  # no overlapping
             timeline.append(next_i)
 
     return timeline
 
-# O(n log n) ? worst case would be n²
-
 
 def interval_partitioning(intervals: list, check=False) -> list:
+    """Interval Scheduling in O(n log n) (?)"""
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     timelines = []
 
@@ -30,12 +28,13 @@ def interval_partitioning(intervals: list, check=False) -> list:
         if timelines == []:
             timelines.append([next_i])
         else:
+            appended = False
             for t in range(
                     len(timelines)):  # can any existing timeline "run" this
-                appended = False
-                if next_i[0] >= timelines[t][-1][1]:  # no overlapping
+                if next_i[0] > timelines[t][-1][1]:  # no overlapping
                     timelines[t].append(next_i)
                     appended = True
+                    break
 
             if not appended:  # create a new timeline
                 timelines.append([next_i])
@@ -45,16 +44,15 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
     return timelines
 
-# Helper
-# O(n²)
-
 
 def max_overlap(intervals: list):
+    """Helper running in O(n²)"""
     max_overlap = 0
-    for i in intervals:
+    max_interval_end = max(intervals, key=lambda x: x[1])[1]
+    for t in range(max_interval_end):
         overlap = 0
-        for j in intervals:
-            if i[0] < j[1] or j[0] < i[1]:  # overlapping
+        for i in intervals:
+            if t >= i[0] and t <= i[1]:
                 overlap += 1
 
         if max(overlap, max_overlap) == overlap:
@@ -66,10 +64,9 @@ def max_overlap(intervals: list):
 test_intervals_deadline = [
     (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
 
-# O(n log n), only first line is different to interval scheduling
-
 
 def interval_lateness(intervals: list, check=False) -> list:
+    """# O(n log n), only first line is different to interval scheduling"""
     intervals.sort(key=lambda x: x[2])  # sort by deadline
     timeline = []
 
@@ -88,19 +85,19 @@ def interval_lateness(intervals: list, check=False) -> list:
 
 test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
-# Helper
-
 
 def huffman_wrapper(frequencies: list) -> dict:
+    """Wraps actual huffman_code() to get the dict for the input aswell"""
     frequencies.sort(key=lambda x: x[1])  # sort by frequency
+
     # key:value , char:empty string
     frequencies_d = {f[0]: "" for f in frequencies}
     return huffman_code(frequencies, frequencies_d)
 
-# O(?), I suppose O(n) actually
-
 
 def huffman_code(frequencies_l: list, frequencies_d) -> dict:
+    """O(?), I suppose O(n) actually"""
+
     # recursion anker, if frequency is one == all characters and frequencies
     # are merged
     if len(frequencies_l) == 1:
@@ -128,11 +125,9 @@ def huffman_code(frequencies_l: list, frequencies_d) -> dict:
 
     return huffman_code(new_frequencies, frequencies_d)
 
-# Helper
-# O(n)
-
 
 def insert_sort(l: list, elem, key=None, order=lambda x, y: x > y):
+    """Insertion Sort/Insert in O(n)"""
     i = 0
     while i < len(l):  # find insert pos
         list_i_val = l[i] if not key else l[i][key]
@@ -155,11 +150,9 @@ def insert_sort(l: list, elem, key=None, order=lambda x, y: x > y):
 test_edges = [(1, 2, 0.5), (2, 4, 5), (2, 3, 2), (3, 5, 1), (1, 5, 10)]
 test_vertices = [1, 2, 3, 4, 5]
 
-# Helper
-# O(n)
-
 
 def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
+    """Helper to get graph (=dict) from input in O(n)"""
     v_e_map = {v: [] for v in vertices}
 
     for e in edges:
@@ -169,10 +162,9 @@ def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
 
     return v_e_map
 
-# O(|V| + |E|) ?
-
 
 def dijkstra(graph: dict, start, end) -> list:
+    """Dijkstra in O(|V| + |E|)"""
     # paths from start to each other t with t being the keys
     cost_s_t = {x: None if x != start else 0 for x in graph}
     queue = [start]  # will hold the vertices at current and next level
@@ -195,11 +187,11 @@ def dijkstra(graph: dict, start, end) -> list:
 
     return cost_s_t[end]
 
-# 'in' has O(n), use dicts for O(1)
-# O(?)
+# TODO : 'in' has O(n), use dicts for O(1)
 
 
 def mst_kruskal(vertices: list, edges: list) -> list:
+    """MST Kruskal"""
     edges.sort(key=lambda x: x[2])  # sort by weight
     v_v_map = []  # list of connections
     reduced_edges = []  # list of not connected parts of the tree (=components)
@@ -244,10 +236,9 @@ def mst_kruskal(vertices: list, edges: list) -> list:
 
     return reduced_edges
 
-# O(?)
-
 
 def mst_prim(graph: dict) -> list:
+    """MST Prim"""
     included_vertices = []
     nonincluded_vertices = list(graph.keys())
     reduced_edges = []
@@ -293,3 +284,56 @@ def mst_prim(graph: dict) -> list:
         possible_edges = possible_edges[1:]
 
     return reduced_edges
+
+############
+# Printing
+############
+
+
+def print_intervals(intervals):
+    """Print intervals more or less pretty"""
+
+    column_name = "interval"
+    margin_left = len(column_name)
+
+    # find the maximum space needed to the left
+    for i in intervals:
+        margin_left = max(len(str(i)), margin_left)
+
+    print(column_name)
+    for i in intervals:
+        # get the interval plus spacing until the timeline starts (1st column)
+        curr_line = str(i)
+        curr_line += ''.join([" "] * (margin_left - len(str(i))))
+
+        # interval on the timline (2nd column)
+        # IMPORTANT : two characters for each timestep !
+        curr_line += ''.join(["  "] * i[0])              # before start
+        curr_line += ''.join(["--"] * (i[1] - i[0])) + "-"  # start to end
+
+        print(curr_line)  # removing last '-'
+
+    # leave space for (1st column)
+    max_end_time = max(intervals, key=lambda x: x[1])[1] + 1
+    last_line = ''.join([" "] * margin_left)
+
+    # x axis description (2nd column)
+    last_line += ''.join([str(x) + " " for x in range(max_end_time)])
+    last_line += "   time steps"
+
+    print(last_line)
+
+
+def print_graphs(vertices, edges):
+    """Pretty view for graphs"""
+    import graphviz
+
+    dot = graphviz.Digraph()
+
+    for n in vertices:
+        dot.node(str(n))
+
+    for e in edges:
+        dot.edge(str(e[0]), str(e[1]), label=str(e[2]))
+
+    dot.render('./graph.gv', view=True)
