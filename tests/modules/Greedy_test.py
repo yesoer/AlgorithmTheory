@@ -1,4 +1,5 @@
 import unittest
+from Context import Greedy
 
 class Greedy_test(unittest.TestCase):
 

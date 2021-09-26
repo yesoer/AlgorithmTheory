@@ -1,4 +1,5 @@
 import unittest
+from Context import DivideConquer
 
 class TestDC(unittest.TestCase):
 
