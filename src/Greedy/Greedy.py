@@ -4,6 +4,7 @@
 
 test_intervals = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
 
+
 def interval_scheduling(intervals: list) -> list:
     """Interval Scheduling in O(n log n)"""
     intervals.sort(key=lambda x: x[1])  # sort by endtime
@@ -16,6 +17,7 @@ def interval_scheduling(intervals: list) -> list:
             timeline.append(next_i)
 
     return timeline
+
 
 def interval_partitioning(intervals: list, check=False) -> list:
     """Interval Scheduling in O(n log n) (?)"""
@@ -40,6 +42,7 @@ def interval_partitioning(intervals: list, check=False) -> list:
         print("Something doesn't work like it's supposed to")
 
     return timelines
+
 
 def max_overlap(intervals: list):
     """Helper running in O(n²)"""
@@ -80,13 +83,15 @@ def interval_lateness(intervals: list, check=False) -> list:
 
 test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
+
 def huffman_wrapper(frequencies: list) -> dict:
     """Wraps actual huffman_code() to get the dict for the input aswell"""
     frequencies.sort(key=lambda x: x[1])  # sort by frequency
-    
+
     # key:value , char:empty string
     frequencies_d = {f[0]: "" for f in frequencies}
     return huffman_code(frequencies, frequencies_d)
+
 
 def huffman_code(frequencies_l: list, frequencies_d) -> dict:
     """O(?), I suppose O(n) actually"""
@@ -181,6 +186,8 @@ def dijkstra(graph: dict, start, end) -> list:
     return cost_s_t[end]
 
 # TODO : 'in' has O(n), use dicts for O(1)
+
+
 def mst_kruskal(vertices: list, edges: list) -> list:
     """MST Kruskal"""
     edges.sort(key=lambda x: x[2])  # sort by weight
@@ -226,6 +233,7 @@ def mst_kruskal(vertices: list, edges: list) -> list:
                 v_v_map[e1_in].append(e[0])
 
     return reduced_edges
+
 
 def mst_prim(graph: dict) -> list:
     """MST Prim"""
@@ -279,12 +287,13 @@ def mst_prim(graph: dict) -> list:
 # Printing
 ############
 
+
 def print_intervals(intervals):
     """Print intervals more or less pretty"""
 
     column_name = "interval"
     margin_left = len(column_name)
-    
+
     # find the maximum space needed to the left
     for i in intervals:
         margin_left = max(len(str(i)), margin_left)
@@ -298,16 +307,16 @@ def print_intervals(intervals):
         # interval on the timline (2nd column)
         # IMPORTANT : two characters for each timestep !
         curr_line += ''.join(["  "] * i[0])              # before start
-        curr_line += ''.join(["--"] * (i[1] - i[0])) + "-" # start to end
+        curr_line += ''.join(["--"] * (i[1] - i[0])) + "-"  # start to end
 
-        print(curr_line) # removing last '-'
-    
+        print(curr_line)  # removing last '-'
+
     # leave space for (1st column)
     max_end_time = max(intervals, key=lambda x: x[1])[1] + 1
-    last_line = ''.join([" "] * margin_left) 
-    
+    last_line = ''.join([" "] * margin_left)
+
     # x axis description (2nd column)
-    last_line += ''.join([str(x) + " " for x in range(max_end_time)]) 
+    last_line += ''.join([str(x) + " " for x in range(max_end_time)])
     last_line += "   time steps"
-    
+
     print(last_line)
