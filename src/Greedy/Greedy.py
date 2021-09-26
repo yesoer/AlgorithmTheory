@@ -30,7 +30,8 @@ def interval_partitioning(intervals: list, check=False) -> list:
         if timelines == []:
             timelines.append([next_i])
         else:
-            for t in range(len(timelines)):  # can any existing timeline "run" this
+            for t in range(
+                    len(timelines)):  # can any existing timeline "run" this
                 appended = False
                 if next_i[0] >= timelines[t][-1][1]:  # no overlapping
                     timelines[t].append(next_i)
@@ -62,7 +63,8 @@ def max_overlap(intervals: list):
     return max_overlap
 
 
-test_intervals_deadline = [(1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
+test_intervals_deadline = [
+    (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
 
 # O(n log n), only first line is different to interval scheduling
 
@@ -91,14 +93,16 @@ test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
 def huffman_wrapper(frequencies: list) -> dict:
     frequencies.sort(key=lambda x: x[1])  # sort by frequency
-    frequencies_d = {f[0]: "" for f in frequencies}  # key:value , char:empty string
+    # key:value , char:empty string
+    frequencies_d = {f[0]: "" for f in frequencies}
     return huffman_code(frequencies, frequencies_d)
 
 # O(?), I suppose O(n) actually
 
 
 def huffman_code(frequencies_l: list, frequencies_d) -> dict:
-    # recursion anker, if frequency is one == all characters and frequencies are merged
+    # recursion anker, if frequency is one == all characters and frequencies
+    # are merged
     if len(frequencies_l) == 1:
         return frequencies_d
 
@@ -182,7 +186,8 @@ def dijkstra(graph: dict, start, end) -> list:
         # if so the target now has a new value and should be evaluated
         for e in graph[curr]:
             if not cost_s_t[e[1]]:  # first value for this vertex
-                cost_s_t[e[1]] = e[2] if not cost_s_t[e[0]] else cost_s_t[e[0]] + e[2]
+                cost_s_t[e[1]] = e[2] if not cost_s_t[e[0]
+                                                      ] else cost_s_t[e[0]] + e[2]
                 queue.append(e[1])
             elif cost_s_t[e[1]] > cost_s_t[e[0]] + e[2]:  # better than old value
                 cost_s_t[e[1]] = cost_s_t[e[0]] + e[2]
@@ -226,7 +231,8 @@ def mst_kruskal(vertices: list, edges: list) -> list:
 
             # update connections
             if (e0_in is None) and (e1_in is None):
-                v_v_map.append([e[0], e[1]])                  # add the new component
+                # add the new component
+                v_v_map.append([e[0], e[1]])
             elif (e0_in is not None) and (e1_in is not None):
                 # connect components a and b in a
                 v_v_map[e0_in] = v_v_map[e0_in] + v_v_map[e1_in]
@@ -279,7 +285,8 @@ def mst_prim(graph: dict) -> list:
         reduced_edges.append(chosen)
 
         new_v = chosen[chosen[3]]
-        included_vertices.append(new_v)    # target of lightest edge is now visited
+        # target of lightest edge is now visited
+        included_vertices.append(new_v)
         nonincluded_vertices.remove(new_v)
         added_vertex = new_v
 

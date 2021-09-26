@@ -2,7 +2,8 @@ test_weighted_edges = [(1, 2, 1), (1, 4, 0), (2, 5, 2),
                        (3, 4, 1), (3, 5, 2), (4, 5, 2), (4, 6, 2)]
 
 # find the edge (as index) that ends latest but before given edge (by index) starts
-# TODO : I think we can reduce the indexes from to (l and r) to one (check cases)
+# TODO : I think we can reduce the indexes from to (l and r) to one (check
+# cases)
 
 
 def binary_search(l: int, r: int, original_e: tuple, edges: list) -> int:
@@ -33,7 +34,8 @@ def weighted_scheduling(edges: list) -> int:
     # that ends latest but before given edge starts
     pre = []
     for i in range(n):
-        map_to = binary_search(0, i, edges[i], edges)  # search in the lower part
+        # search in the lower part
+        map_to = binary_search(0, i, edges[i], edges)
         pre.append(map_to)
 
     M = [0]  # partial solutions table
