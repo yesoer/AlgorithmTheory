@@ -36,9 +36,28 @@ class Greedy_test(unittest.TestCase):
     #############
 
     def test_huffman_wrapper(self):
-        cases = [([('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)], {'p': '011', 'm': '010', 'i': '00', 's': '1'})]
+        cases = [([('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11),
+                  ('p', 1 / 11)], {'p': '011', 'm': '010', 'i': '00', 's': '1'})]
         self.run_cases(cases, Greedy.huffman_wrapper)
         print_something(self)
+
+    ############
+    # Graphs
+    ############
+
+    def test_dijkstra(self):
+        pass
+
+    def test_mst_kruskal(self):
+        pass
+
+    def test_mst_prim(self):
+        pass
+
+    ############
+    # Helper
+    ############
+
     def run_cases(self, cases, to_test):
         # a case is a tuple (input, expected result)
         for _input, expected in cases:
