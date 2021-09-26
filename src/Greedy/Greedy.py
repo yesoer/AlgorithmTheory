@@ -13,7 +13,7 @@ def interval_scheduling(intervals: list) -> list:
     for next_i in intervals:
         if timeline == []:
             timeline.append(next_i)
-        elif next_i[0] >= timeline[-1][1]:  # no overlapping
+        elif next_i[0] > timeline[-1][1]:  # no overlapping
             timeline.append(next_i)
 
     return timeline
