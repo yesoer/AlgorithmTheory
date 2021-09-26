@@ -50,10 +50,8 @@ def interval_scheduling(intervals: list) -> list:
 
     return timeline
 
-# O(n log n) ? worst case would be n²
-
-
 def interval_partitioning(intervals: list, check=False) -> list:
+    """Interval Scheduling in O(n log n) (?)"""
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     timelines = []
 
@@ -76,11 +74,8 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
     return timelines
 
-# Helper
-# O(n²)
-
-
 def max_overlap(intervals: list):
+    """Helper running in O(n²)"""
     max_overlap = 0
     for i in intervals:
         overlap = 0
@@ -97,10 +92,9 @@ def max_overlap(intervals: list):
 test_intervals_deadline = [
     (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
 
-# O(n log n), only first line is different to interval scheduling
-
 
 def interval_lateness(intervals: list, check=False) -> list:
+    """# O(n log n), only first line is different to interval scheduling"""
     intervals.sort(key=lambda x: x[2])  # sort by deadline
     timeline = []
 
@@ -119,19 +113,17 @@ def interval_lateness(intervals: list, check=False) -> list:
 
 test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
-# Helper
-
-
 def huffman_wrapper(frequencies: list) -> dict:
+    """Wraps actual huffman_code() to get the dict for the input aswell"""
     frequencies.sort(key=lambda x: x[1])  # sort by frequency
+    
     # key:value , char:empty string
     frequencies_d = {f[0]: "" for f in frequencies}
     return huffman_code(frequencies, frequencies_d)
 
-# O(?), I suppose O(n) actually
-
-
 def huffman_code(frequencies_l: list, frequencies_d) -> dict:
+    """O(?), I suppose O(n) actually"""
+
     # recursion anker, if frequency is one == all characters and frequencies
     # are merged
     if len(frequencies_l) == 1:
@@ -159,11 +151,9 @@ def huffman_code(frequencies_l: list, frequencies_d) -> dict:
 
     return huffman_code(new_frequencies, frequencies_d)
 
-# Helper
-# O(n)
-
 
 def insert_sort(l: list, elem, key=None, order=lambda x, y: x > y):
+    """Insertion Sort/Insert in O(n)"""
     i = 0
     while i < len(l):  # find insert pos
         list_i_val = l[i] if not key else l[i][key]
@@ -186,11 +176,9 @@ def insert_sort(l: list, elem, key=None, order=lambda x, y: x > y):
 test_edges = [(1, 2, 0.5), (2, 4, 5), (2, 3, 2), (3, 5, 1), (1, 5, 10)]
 test_vertices = [1, 2, 3, 4, 5]
 
-# Helper
-# O(n)
-
 
 def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
+    """Helper to get graph (=dict) from input in O(n)"""
     v_e_map = {v: [] for v in vertices}
 
     for e in edges:
@@ -200,10 +188,9 @@ def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
 
     return v_e_map
 
-# O(|V| + |E|) ?
-
 
 def dijkstra(graph: dict, start, end) -> list:
+    """Dijkstra in O(|V| + |E|)"""
     # paths from start to each other t with t being the keys
     cost_s_t = {x: None if x != start else 0 for x in graph}
     queue = [start]  # will hold the vertices at current and next level
@@ -226,11 +213,9 @@ def dijkstra(graph: dict, start, end) -> list:
 
     return cost_s_t[end]
 
-# 'in' has O(n), use dicts for O(1)
-# O(?)
-
-
+# TODO : 'in' has O(n), use dicts for O(1)
 def mst_kruskal(vertices: list, edges: list) -> list:
+    """MST Kruskal"""
     edges.sort(key=lambda x: x[2])  # sort by weight
     v_v_map = []  # list of connections
     reduced_edges = []  # list of not connected parts of the tree (=components)
@@ -275,10 +260,8 @@ def mst_kruskal(vertices: list, edges: list) -> list:
 
     return reduced_edges
 
-# O(?)
-
-
 def mst_prim(graph: dict) -> list:
+    """MST Prim"""
     included_vertices = []
     nonincluded_vertices = list(graph.keys())
     reduced_edges = []
