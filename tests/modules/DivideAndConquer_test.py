@@ -1,5 +1,5 @@
 import unittest
-from Context import DivideConquer
+from Context import DivideAndConquer
 
 class TestDC(unittest.TestCase):
 
