@@ -1,5 +1,9 @@
 
 # set test modules path
+import unittest
+import DynamicProgramming_test
+import DivideAndConquer_test
+import Greedy_test
 import sys
 import pathlib
 
@@ -8,12 +12,8 @@ sys.path.insert(0, curr_path + "/modules")
 
 # import test modules
 
-import Greedy_test
-import DivideAndConquer_test
-import DynamicProgramming_test
 
 # init test suite
-import unittest
 
 loader = unittest.TestLoader()
 suite = unittest.TestSuite()

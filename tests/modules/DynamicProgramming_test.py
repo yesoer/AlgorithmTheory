@@ -1,6 +1,7 @@
 import unittest
 from Context import DynamicProgramming
 
+
 class TestDP(unittest.TestCase):
 
     # uses testwrapper to execute various scenarios
