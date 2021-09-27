@@ -56,7 +56,8 @@ class Greedy_test(unittest.TestCase):
     ############
 
     def run_cases(self, cases, to_test):
-        # a case is a tuple (input, expected result) where input is a list [arg1, arg2 ...]
+        # a case is a tuple (input, expected result) where input is a list
+        # [arg1, arg2 ...]
         for _input, expected in cases:
             print(
                 "\n\ntesting input : ",

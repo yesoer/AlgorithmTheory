@@ -328,13 +328,13 @@ def print_graphs(vertices, edges, directed=True):
     """Pretty view for graphs"""
     import graphviz
 
-    dot = graphviz.Digraph() if directed else graphviz.Graph() 
+    dot = graphviz.Digraph() if directed else graphviz.Graph()
 
     for n in vertices:
         dot.node(str(n))
 
     for e in edges:
-        label= str(e[2]) if len(e) >= 3 else ""
+        label = str(e[2]) if len(e) >= 3 else ""
         dot.edge(str(e[0]), str(e[1]), label=label)
 
     dot.render('./graph.gv', view=True)
