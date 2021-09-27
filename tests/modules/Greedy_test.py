@@ -48,7 +48,9 @@ class Greedy_test(unittest.TestCase):
         self.run_cases(cases, Greedy.dijkstra)
 
     def test_mst_kruskal(self):
-        pass
+        cases = [([[1, 2, 3, 4, 5], [(1, 2, 0.5), (2, 4, 5), (2, 3, 2), (3, 5, 1), (1, 5, 10)]], [
+                  (1, 2, 0.5), (3, 5, 1), (2, 3, 2), (2, 4, 5)])]
+        self.run_cases(cases, Greedy.mst_kruskal)
 
     def test_mst_prim(self):
         pass
