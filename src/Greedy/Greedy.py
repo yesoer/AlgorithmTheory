@@ -324,16 +324,17 @@ def print_intervals(intervals):
     print(last_line)
 
 
-def print_graphs(vertices, edges):
+def print_graphs(vertices, edges, directed=True):
     """Pretty view for graphs"""
     import graphviz
 
-    dot = graphviz.Digraph()
+    dot = graphviz.Digraph() if directed else graphviz.Graph()
 
     for n in vertices:
         dot.node(str(n))
 
     for e in edges:
-        dot.edge(str(e[0]), str(e[1]), label=str(e[2]))
+        label = str(e[2]) if len(e) >= 3 else ""
+        dot.edge(str(e[0]), str(e[1]), label=label)
 
     dot.render('./graph.gv', view=True)
