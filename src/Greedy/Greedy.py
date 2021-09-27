@@ -265,8 +265,9 @@ def mst_prim(graph: dict) -> list:
                 possible_edges = insert_sort(possible_edges, e, key=2)
 
         # remove lightest edges that create circles
-        def creates_circle(
-            x, y): return x in included_vertices and possible_edges[0][1] in included_vertices
+        def creates_circle(x, y):
+            return x in included_vertices and possible_edges[0][1] in included_vertices
+
         while creates_circle(possible_edges[0][0],
                              possible_edges[0][1]):  # don't add circle
             possible_edges = possible_edges[1:]
