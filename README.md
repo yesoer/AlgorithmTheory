@@ -37,9 +37,7 @@ document this knowledge and test my understanding by implementing them.
 Each of the modules is accompanied by a corresponding `.md` file with short explanations and examples on the algorithms. (very much WIP)
 
 modules may be imported from the package like this
-`from AlgorithmTheory.src.DivideConquer import DivideAndConquer`
-if you really need to but this repository should not be thought of as
-an efficient algorithm library (yet, who knows).
+`from AlgorithmTheory import DivideAndConquer`
 
 `tests`, as you might've guessed, contains the testsuite.
  For each module in `src` there is a testing module in `tests/modules`.
