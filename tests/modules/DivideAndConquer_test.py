@@ -2,6 +2,7 @@ import unittest
 from Context import DivideAndConquer
 from Context import run_cases
 
+
 class TestDC(unittest.TestCase):
 
     def setUp(self):
