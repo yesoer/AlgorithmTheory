@@ -4,7 +4,7 @@
 This is supposed to be a place where I can learn about algorithms,
 document this knowledge and test my understanding by implementing them.
 
-#### Algorith  overview
+#### Algorithm  overview
 
 1. **Greedy Algorithms**
 - [x] Interval Scheduling 
