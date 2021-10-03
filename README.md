@@ -4,28 +4,28 @@
 This is supposed to be a place where I can learn about algorithms,
 document this knowledge and test my understanding by implementing them.
 
-#### In this project
+#### Algorith  overview
 
 1. **Greedy Algorithms**
-- Interval Scheduling 
-- Interval Partitioning
-- Interval Lateness Minimization
-- Dijkstra
-- Minimal Span Trees (MST)
-- Huffman Codes
+- [x] Interval Scheduling 
+- [x] Interval Partitioning
+- [x] Interval Lateness Minimization
+- [x] Dijkstra
+- [x] Minimal Span Trees (MST)
+- [x] Huffman Codes
 
 2. **Divide and Conquer**
-- Counting Inversions
-- Closest Pair
-- Matrix Multiplication
-- Fast Fourier Transformation (FFT)
+- [x] Counting Inversions
+- [x] Closest Pair
+- [ ] Matrix Multiplication
+- [ ] Fast Fourier Transformation (FFT)
 
 3. **Dynamic Programming**
-- Weighted Interval Scheduling
-- Knapsack
-- Longest Common Subsequence
-- Shortest Paths (revisited: Bellman Ford)
-- Detection of negative circles 
+- [x] Weighted Interval Scheduling
+- [ ] Knapsack
+- [ ] Longest Common Subsequence
+- [ ] Shortest Paths (revisited: Bellman Ford)
+- [ ] Detection of negative circles 
 
 4. **Flow Graphs**
 - Maximum Flow (Ford-Fulkerson)
@@ -35,6 +35,11 @@ document this knowledge and test my understanding by implementing them.
 
 `src` contains the modules for the various types of algorithms.
 Each of the modules is accompanied by a corresponding `.md` file with short explanations and examples on the algorithms. (very much WIP)
+
+modules may be imported from the package like this
+`from AlgorithmTheory.src.DivideConquer import DivideAndConquer`
+if you really need to but this repository should not be thought of as
+an efficient algorithm library (yet, who knows).
 
 `tests`, as you might've guessed, contains the testsuite.
  For each module in `src` there is a testing module in `tests/modules`.
