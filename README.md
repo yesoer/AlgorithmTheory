@@ -28,8 +28,8 @@ document this knowledge and test my understanding by implementing them.
 - [ ] Detection of negative circles 
 
 4. **Flow Graphs**
-- Maximum Flow (Ford-Fulkerson)
-- Circulation in flow graphs
+- [ ] Maximum Flow (Ford-Fulkerson)
+- [ ] Circulation in flow graphs
 
 #### Structure
 
