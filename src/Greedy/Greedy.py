@@ -88,7 +88,12 @@ test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
 def huffman_wrapper(frequencies: list) -> dict:
     """Wraps actual huffman_code() to get the dict for the input aswell"""
-    frequencies.sort(key=lambda x: x[1])  # sort by frequency
+    
+    # map frequencies to a higher space to avoid floating point errors
+    frequencies = [(x,y * 100) for x,y in frequencies] 
+
+    # sort by frequency
+    frequencies.sort(key=lambda x: x[1])
 
     # key:value , char:empty string
     frequencies_d = {f[0]: "" for f in frequencies}
