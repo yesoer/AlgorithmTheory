@@ -39,7 +39,9 @@ class Greedy_test(unittest.TestCase):
 
     def test_huffman_wrapper(self):
         cases = [([[('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11),
-                  ('p', 1 / 11)]], {'p': '011', 'm': '010', 'i': '00', 's': '1'})]
+                  ('p', 1 / 11)]], {'p': '100', 'm': '101', 'i': '11', 's': '0'}),
+                  ([[('a', 0.4), ('b', 0.3), ('c', 0.2),
+                  ('d', 0.1)]], {'a': '0', 'b': '11', 'c': '101', 'd': '100'})]
         run_cases(self, cases, Greedy.huffman_wrapper)
 
     ############
