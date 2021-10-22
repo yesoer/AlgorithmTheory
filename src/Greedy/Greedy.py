@@ -18,9 +18,9 @@ def interval_scheduling(intervals: list) -> list:
 
     return timeline
 
-
+# TODO : check if the inner loop pushes this out of O(n log n)
 def interval_partitioning(intervals: list, check=False) -> list:
-    """Interval Scheduling in O(n log n) (?)"""
+    """Interval Partitioning in O(n log n)"""
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     timelines = []
 
@@ -66,7 +66,7 @@ test_intervals_deadline = [
 
 
 def interval_lateness(intervals: list, check=False) -> list:
-    """# O(n log n), only first line is different to interval scheduling"""
+    """O(n log n), only first line is different to interval scheduling"""
     intervals.sort(key=lambda x: x[2])  # sort by deadline
     timeline = []
 
@@ -92,11 +92,12 @@ def huffman_wrapper(frequencies: list) -> dict:
 
     # key:value , char:empty string
     frequencies_d = {f[0]: "" for f in frequencies}
+
     return huffman_code(frequencies, frequencies_d)
 
 
-def huffman_code(frequencies_l: list, frequencies_d) -> dict:
-    """O(?), I suppose O(n) actually"""
+def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
+    """O(?)"""
 
     # recursion anker, if frequency is one == all characters and frequencies
     # are merged
@@ -105,19 +106,19 @@ def huffman_code(frequencies_l: list, frequencies_d) -> dict:
 
     # elements to be merged are those with the smallest frequency
     key_smallest = frequencies_l[0][0]
-    key_second_smalles = frequencies_l[1][0]
+    key_second_smallest = frequencies_l[1][0]
 
     # simulate the hirarchy in the tree so add a leading
     # 1 or 0 to all the children in the corresponding subtree
     for key in key_smallest:
         frequencies_d[key] = "1" + frequencies_d[key]
 
-    for key in key_second_smalles:
         frequencies_d[key] = "0" + frequencies_d[key]
 
+    for key in key_second_smallest:
     # merge elements with smallest frequency
     merged_freq = frequencies_l[0][1] + frequencies_l[1][1]
-    merged_key = key_smallest + key_second_smalles
+    merged_key = key_smallest + key_second_smallest
     merged = (merged_key, merged_freq)
 
     # insert the new element in the list and remove the old ones
