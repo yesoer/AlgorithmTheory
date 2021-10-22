@@ -116,11 +116,11 @@ def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
     # simulate the hirarchy in the tree so add a leading
     # 1 or 0 to all the children in the corresponding subtree
     for key in key_smallest:
-        frequencies_d[key] = "1" + frequencies_d[key]
-
         frequencies_d[key] = "0" + frequencies_d[key]
 
     for key in key_second_smallest:
+        frequencies_d[key] = "1" + frequencies_d[key]
+
     # merge elements with smallest frequency
     merged_freq = frequencies_l[0][1] + frequencies_l[1][1]
     merged_key = key_smallest + key_second_smallest
