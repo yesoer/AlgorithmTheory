@@ -82,14 +82,13 @@ So the objective is to find a prefix free encoding where small frequencies corre
 short codes.
 
 **Solution :**
-Bottom up :
-```
-1 if|Σ|= 2:
-2   kodiere einen Buchstaben mit 0, den anderen mit 1
-3 else:
-4   a,b := ”Buchstaben mit kleinster Häufigkeit“
-5   lösche a und b aus Σ und füge neuen Buchstaben 'ab' hinzu
-6   f('ab') := f(a) + f(b)
-7   Konstruiere rekursiv prafixfreien Code mit Baum T′
-8   Ersetze in T′ das Blatt 'ab' durch den Unterbaum
-```
+Build a tree by always choosing the two elements with the smallest frequency.
+These two are now assigned a parent which in turn is assigned the combined frequency (i.e. if the elements d, c with fequencies 0.1 and 0.2 are combined, their parent dc has the frequency 0.3).
+For the next iteration the two elements are disregarded but their parent is taken into consideration.
+Therefore over time all elements will be concatenated and the root of the tree should have a frequency of 1.
+Assigning 1 and 0 to the two edges going down from each parent gives us paths of 1s and 0s to each leaf (= individual characters). Those paths are the prefix free codes.
+
+![Huffman_Example](https://upload.wikimedia.org/wikipedia/commons/7/74/Huffman_coding_example.svg)
+By Alessio Damato - self-made  This W3C-unspecified vector image was created with Inkscape ., CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2123492
+
+The code provided here will **not** produce this exact result because it has no clue about what path goes right and which goes left. It assigns 0 to the smaller frequency child and 1 to the other, which still yields a correct result though.
