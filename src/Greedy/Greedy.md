@@ -10,18 +10,24 @@ overlapping and as many are processed as possible.
 
 **Solution :**
 Choose the next interval to include by their endtime, earlier ones being the preference.
-Of course one should only consider those where the starting time is more or equal to the 
+Since the result should be none overlapping one should only consider those where the starting time is larger than the 
 endtime of the lastly chosen Interval.
+
+**Runtime Complexity :**
+The sorting takes O(n log n). After that we only need to iterate over this sorted list, which gives us O(n) for that part and thereby O(n log n) in total.
 
 #### Interval Partitioning
 
 **Problem :**
-Find the least number of timelines necessary so no intervals overlap.
+Find the least number of timelines necessary such that no intervals overlap.
 
 **Solution :**
 It's equal to the max number of overlapping intervals.
 One could also process one after another and if they don't fit into an existing timeline, 
 a new one should be created. 
+
+**Runtime Complexity :**
+The sorting takes O(n log n). After that we only need to iterate over this sorted list, which gives us O(n) for that part and thereby O(n log n) in total.
 
 #### Interval Lateness Minimization
 
@@ -32,6 +38,8 @@ between deadline and end.
 **Solution :**
 Choose the next interval by the earliest remaining deadline.
 
+**Runtime Complexity :**
+Compared to interval scheduling, only the property by which we sort changes. Therefore this can be done in O(n log n aswell).
 ### Graphs <hr />
 
 #### Dijkstra
