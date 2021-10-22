@@ -132,7 +132,7 @@ def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
     return huffman_code(new_frequencies, frequencies_d)
 
 
-def insert_sort(l: list, elem, key=None, order=lambda x, y: x > y):
+def insert_sort(l: list, elem, key=None, order=lambda x, y: x >= y) -> list:
     """Insertion Sort/Insert in O(n)"""
     i = 0
     while i < len(l):  # find insert pos
