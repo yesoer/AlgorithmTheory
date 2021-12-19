@@ -6,7 +6,14 @@ test_intervals = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
 
 
 def interval_scheduling(intervals: list) -> list:
-    """Interval Scheduling in O(n log n)"""
+    """
+    Interval Scheduling in O(n log n).
+        Parameters:
+            intervals(list): list of tuples representing jobs as (start, end)
+            
+        Returns:
+            timeline(list): list of chosen intervals
+    """
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     timeline = []
 
@@ -20,7 +27,15 @@ def interval_scheduling(intervals: list) -> list:
 
 # TODO : check if the inner loop pushes this out of O(n log n)
 def interval_partitioning(intervals: list, check=False) -> list:
-    """Interval Partitioning in O(n log n)"""
+    """
+    Interval Partitioning in O(n log n)
+        Parameters:
+            intervals(list): list of tuples representing jobs as (start, end)
+            check(boolean): check against result of max_overlap (defaults to false)
+            
+        Returns:
+            timelines(list): list of chosen intervals, per machine
+    """
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     timelines = []
 
@@ -45,8 +60,15 @@ def interval_partitioning(intervals: list, check=False) -> list:
     return timelines
 
 
-def max_overlap(intervals: list):
-    """Helper running in O(n²)"""
+def max_overlap(intervals: list) -> int:
+    """
+    Helper running in O(n²)
+        Parameters:
+            intervals(list): list of tuples representing jobs as (start, end)
+            
+        Returns:
+            max_overlap(int): maximum number of overlapping jobs
+    """
     max_overlap = 0
     max_interval_end = max(intervals, key=lambda x: x[1])[1]
     for t in range(max_interval_end):
@@ -65,9 +87,18 @@ test_intervals_deadline = [
     (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
 
 
-def interval_lateness(intervals: list, check=False) -> list:
-    """O(n log n), only first line is different to interval scheduling"""
-    intervals.sort(key=lambda x: x[2])  # sort by deadline
+def interval_lateness(intervals: list) -> list:
+    """
+    O(n log n)
+        Parameters:
+            intervals(list): list of tuples representing jobs as (start, end)
+            
+        Returns:
+            timeline(int): list of chosen intervals
+    """
+
+    # sort by deadline, only difference to usual scheduling
+    intervals.sort(key=lambda x: x[2])
     timeline = []
 
     for next_i in intervals:
@@ -87,7 +118,14 @@ test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
 
 def huffman_wrapper(frequencies: list) -> dict:
-    """Wraps actual huffman_code() to get the dict for the input aswell"""
+    """
+    Wraps actual huffman_code() to get the dict for the input aswell
+        Parameters:
+            frequencies(list): list of tuples : (character, frequency)
+            
+        Returns:
+            huffman_codes(dict): computed huffman codes, as { char: binary }
+    """
     
     # map frequencies to a higher space to avoid floating point errors
     frequencies = [(x,y * 100) for x,y in frequencies] 
@@ -98,11 +136,20 @@ def huffman_wrapper(frequencies: list) -> dict:
     # key:value , char:empty string
     frequencies_d = {f[0]: "" for f in frequencies}
 
-    return huffman_code(frequencies, frequencies_d)
+    huffman_codes = huffman_code(frequencies, frequencies_d)
+    return huffman_codes
 
 
 def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
-    """O(?)"""
+    """
+    O(?)
+        Parameters:
+            frequencies(list): list of tuples (character, frequency) 
+                               ,sorted by the latter
+            
+        Returns:
+            huffman_codes(dict): computed huffman codes, as { char: binary }
+    """
 
     # recursion anker, if frequency is one == all characters and frequencies
     # are merged
@@ -133,7 +180,17 @@ def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
 
 
 def insert_sort(l: list, elem, key=None, order=lambda x, y: x >= y) -> list:
-    """Insertion Sort/Insert in O(n)"""
+    """
+        Insertion Sort/Insert in O(n)
+        Parameters:
+            l(list): list of type T
+            elem(T): element to insert
+            key: key for accessing compare property of T (default: None)
+            order(lambda): compare function for T[key] (default: >=)
+            
+        Returns:
+            l(list): l with inserted elem
+    """
     i = 0
     while i < len(l):  # find insert pos
         list_i_val = l[i] if not key else l[i][key]
@@ -158,7 +215,16 @@ test_vertices = [1, 2, 3, 4, 5]
 
 
 def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
-    """Helper to get graph (=dict) from input in O(n)"""
+    """
+    Helper to get graph (=dict) from input in O(n)
+        Parameters:
+            vertices(list): list of vertices
+            edges(list): representing edges as [(start, end, ...)]
+            directed(boolean): whether the graph is directed (default: false)
+            
+        Returns:
+            v_e_map(dict): graph as { vertice: [edge with vertice] }
+    """
     v_e_map = {v: [] for v in vertices}
 
     for e in edges:
@@ -170,7 +236,16 @@ def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
 
 
 def dijkstra(graph: dict, start, end) -> list:
-    """Dijkstra in O(|V| + |E|)"""
+    """
+    Dijkstra in O(|V| + |E|)
+        Parameters:
+            graph(dict): graph as { vertice: [edge with vertice] }
+            start(list): start vertex
+            end(boolean): end vertex
+            
+        Returns:
+            cost_s_t(list): path from s to t as edges (start, end, weight)
+    """
     # paths from start to each other t with t being the keys
     cost_s_t = {x: None if x != start else 0 for x in graph}
     queue = [start]  # will hold the vertices at current and next level
@@ -194,10 +269,16 @@ def dijkstra(graph: dict, start, end) -> list:
     return cost_s_t[end]
 
 # TODO : 'in' has O(n), use dicts for O(1)
-
-
 def mst_kruskal(vertices: list, edges: list) -> list:
-    """MST Kruskal"""
+    """
+    MST Kruskal
+        Parameters:
+            vertices(list): list of vertices
+            edges(list): list of edges (start, end, weight)
+            
+        Returns:
+            reduced_edges(list): list of edges (start, end, weight) for mst
+    """
     edges.sort(key=lambda x: x[2])  # sort by weight
     v_v_map = []  # list of connections
     reduced_edges = []  # list of not connected parts of the tree (=components)
@@ -244,7 +325,14 @@ def mst_kruskal(vertices: list, edges: list) -> list:
 
 
 def mst_prim(graph: dict) -> list:
-    """MST Prim"""
+    """
+    MST Prim
+        Parameters:
+            graph(dict): graph as { vertice: [edge with vertice] }
+            
+        Returns:
+            reduced_edges(list): list of edges (start, end, weight) for mst
+    """
     included_vertices = []
     nonincluded_vertices = list(graph.keys())
     reduced_edges = []
