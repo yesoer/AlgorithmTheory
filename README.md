@@ -2,9 +2,11 @@
 
 #### About this project
 This is supposed to be a place where I can learn about algorithms,
-document this knowledge and test my understanding by implementing them.
+document this knowledge and test my understanding by implementing them and if it helps anyone else I consider that a win-win.
 
 #### Algorithm  overview
+
+The following list tracks which algorithms have been included and which are planned. Don't hesitate to suggest more !
 
 1. **Greedy Algorithms**
 - [x] Interval Scheduling 
@@ -35,6 +37,7 @@ document this knowledge and test my understanding by implementing them.
 
 `src` contains the modules for the various types of algorithms.
 Each of the modules is accompanied by a corresponding `.md` file with short explanations and examples on the algorithms. (very much WIP)
+Furthermore there is a `utils.py`, which at the moment just contains visualization helpers for graphs and intervals. 
 
 modules may be imported from the package like this
 `from AlgorithmTheory import DivideAndConquer`
@@ -55,4 +58,4 @@ run from the root of the directory with:
 
 **Printing Graphs :**
 
-graphviz, which can be installed with `pip install graphviz`.
+graphviz, which can be installed with `pip install graphviz` but it's only needed for the corresponding utils function.
