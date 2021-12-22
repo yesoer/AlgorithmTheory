@@ -28,11 +28,6 @@ class Greedy_test(unittest.TestCase):
         cases = [([[(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]], 3)]
         run_cases(self, cases, Greedy.max_overlap)
 
-    def test_interval_lateness(self):
-        cases = [([[
-            (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]], [(0, 2, 3), (3, 6, 6)])]
-        run_cases(self, cases, Greedy.interval_lateness)
-
     #############
     # Frequencies
     #############
