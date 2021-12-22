@@ -58,6 +58,7 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
     if check and len(timelines) != max_overlap(intervals):  # check correctness
         print("Something doesn't work like it's supposed to")
+        return None
 
     return timelines
 

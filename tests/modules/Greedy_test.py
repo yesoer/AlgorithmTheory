@@ -6,7 +6,9 @@ from Context import run_cases
 class Greedy_test(unittest.TestCase):
 
     def setUp(self):
-        ...
+        self.intervals1 = [(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]
+        self.intervals2 = [(2, 3), (3, 8), (1, 10), (2, 5), (8, 9)]
+        self.intervals3 = [(1, 3), (3, 8), (2, 5), (0, 3), (0, 2)]
 
     def tearDown(self):
         ...
@@ -16,16 +18,33 @@ class Greedy_test(unittest.TestCase):
     ############
 
     def test_interval_scheduling(self):
-        cases = [([[(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]], [(0, 2), (2, 5)])]
+        cases = [
+                ( [self.intervals1], [(0, 2), (2, 5)] ),
+                ( [self.intervals2], [(2, 3), (3, 8), (8, 9)] ),
+                ( [self.intervals3], [(0, 2), (2, 5)] )
+                ]
         run_cases(self, cases, Greedy.interval_scheduling)
 
     def test_interval_partitioning(self):
-        cases = [([[(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)], True],
-                  [[(0, 2), (2, 5)], [(1, 3), (3, 6)], [(4, 6)]])]
+        arg1 = [self.intervals1, True]
+        res1 = [[(0, 2), (2, 5)], [(1, 3), (3, 6)], [(4, 6)]]
+
+        arg2 = [self.intervals2, True]
+        res2 = [[(2, 3), (3, 8), (8, 9)], [(2, 5)], [(1, 10)]]
+
+        arg3 = [self.intervals3, True]
+        res3 = [[(0, 2), (2, 5)], [(1, 3), (3, 8)], [(0, 3)]]
+
+        cases = [(arg1, res1), (arg2, res2), (arg3, res3)]
+
         run_cases(self, cases, Greedy.interval_partitioning)
 
     def test_max_overlap(self):
-        cases = [([[(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]], 3)]
+        cases = [
+                ( [self.intervals1], 3 ),
+                ( [self.intervals2], 3 ),
+                ( [self.intervals3], 3 )
+                ]
         run_cases(self, cases, Greedy.max_overlap)
 
     #############

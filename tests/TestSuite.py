@@ -1,4 +1,3 @@
-
 # set test modules path
 import unittest
 import sys
@@ -7,15 +6,12 @@ import pathlib
 curr_path = str(pathlib.Path(__file__).parent.resolve())
 sys.path.insert(0, curr_path + "/modules")
 
+# import test modules
 import DynamicProgramming_test  # nopep8
 import DivideAndConquer_test  # nopep8
 import Greedy_test  # nopep8
 
-# import test modules
-
-
 # init test suite
-
 loader = unittest.TestLoader()
 suite = unittest.TestSuite()
 
