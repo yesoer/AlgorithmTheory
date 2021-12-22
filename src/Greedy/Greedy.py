@@ -64,24 +64,35 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
 def max_overlap(intervals: list) -> int:
     """
-    Helper running in O(n²)
+    Helper running in O(n log n)
         Parameters:
             intervals(list): list of tuples representing jobs as (start, end)
             
         Returns:
             max_overlap(int): maximum number of overlapping jobs
     """
+
+    # flatten intervals into one timeline
+    end_values = [ { "val": i[1], "type": "end"} for i in intervals]
+    start_values = [ { "val": i[0], "type": "start"} for i in intervals]
+
+    all_values = start_values + end_values
+    # sort by increasing time first and secondly end first
+    # thereby if start of i matches end of j, the end is processed 
+    # first and it is not counted as an overlap
+    all_values.sort(key=lambda x: (x["val"], 1 if x["type"] == "start" else 0))
+
+    # iterate over timeline and increase/decrease overlap,
+    # when there is a start/end
+    curr_overlap = 0
     max_overlap = 0
-    max_interval_end = max(intervals, key=lambda x: x[1])[1]
+    for v in all_values:
+        if v["type"] == "start":
+            curr_overlap += 1
+        else:
+            curr_overlap -= 1
 
-    for t in range(max_interval_end):
-        overlap = 0
-        for i in intervals:
-            if t >= i[0] and t <= i[1]:
-                overlap += 1
-
-        if max(overlap, max_overlap) == overlap:
-            max_overlap = overlap
+        max_overlap = max(curr_overlap, max_overlap)
 
     return max_overlap
 
