@@ -133,17 +133,18 @@ def huffman_wrapper(frequencies: list, check=False) -> dict:
 
 def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
     """
-    O(?)
+    O(?) recursion has #character depth
         Parameters:
-            frequencies(list): list of tuples (character, frequency) 
-                               ,sorted by the latter
+            frequencies_l(list): list of tuples (character, frequency) 
+                                 ,sorted by the latter
+            frequencies_d(dict): dict, which maps each character to the empty list
             
         Returns:
             huffman_codes(dict): computed huffman codes, as { char: binary }
     """
 
-    # recursion anker, if frequency is one == all characters and frequencies
-    # are merged
+    # recursion anker, if frequency is one that means
+    #  all characters and frequencies are merged
     if len(frequencies_l) == 1:
         return frequencies_d
 
@@ -153,6 +154,7 @@ def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
 
     # simulate the hirarchy in the tree so add a leading
     # 1 or 0 to all the children in the corresponding subtree
+    # reminder: 'key' consists of one or more (!) characters
     for key in key_smallest:
         frequencies_d[key] = "0" + frequencies_d[key]
 
@@ -191,7 +193,7 @@ def insert_sort(l: list, elem, key=None, order=lambda x, y: x >= y) -> list:
     """
         Insertion Sort/Insert in O(n)
         Parameters:
-            l(list): list of type T
+            l(list): list with elements of type T
             elem(T): element to insert
             key: key for accessing compare property of T (default: None)
             order(lambda): compare function for T[key] (default: >=)
