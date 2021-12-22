@@ -85,33 +85,6 @@ def max_overlap(intervals: list) -> int:
     return max_overlap
 
 
-test_intervals_deadline = [
-    (1, 3, 5), (0, 2, 3), (2, 5, 7), (3, 6, 6), (4, 6, 8)]
-
-
-def interval_lateness(intervals: list) -> list:
-    """
-    O(n log n)
-        Parameters:
-            intervals(list): list of tuples representing jobs as (start, end)
-            
-        Returns:
-            timeline(int): list of chosen intervals
-    """
-    if intervals == []:
-        return []
-
-    # sort by deadline, only difference to usual scheduling
-    intervals.sort(key=lambda x: x[2])
-    timeline = [ intervals[0] ]
-
-    for next_i in intervals[1:]:
-        if next_i[0] >= timeline[-1][1]:  # no overlapping
-            timeline.append(next_i)
-
-    return timeline
-
-
 ############
 # Frequencies
 ############

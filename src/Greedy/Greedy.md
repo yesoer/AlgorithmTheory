@@ -31,15 +31,19 @@ The sorting takes O(n log n). After that we only need to iterate over this sorte
 
 #### Interval Lateness Minimization
 
+For this problem we will be looking at intervals of the form (duration, deadline). Therefore no overlap has to be considered.
+
 **Problem :**
 The intervals now feature a deadline. The objective is to minimize the overall time 
 between deadline and end.
 
 **Solution :**
 Choose the next interval by the earliest remaining deadline.
+Since we don't have to consider overlap, this is actually the whole algorithm.
 
 **Runtime Complexity :**
-Compared to interval scheduling, only the property by which we sort changes. Therefore this can be done in O(n log n aswell).
+O(n log n)
+
 ### Graphs <hr />
 
 #### Dijkstra
