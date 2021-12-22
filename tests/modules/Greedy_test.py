@@ -10,6 +10,10 @@ class Greedy_test(unittest.TestCase):
         self.intervals2 = [(2, 3), (3, 8), (1, 10), (2, 5), (8, 9)]
         self.intervals3 = [(1, 3), (3, 8), (2, 5), (0, 3), (0, 2)]
 
+        self.frequencies1 = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
+        self.frequencies2 = [('a', 0.4), ('b', 0.3), ('c', 0.2), ('d', 0.1)]
+        self.frequencies3 = [('a', 1/6), ('b', 1/6), ('c', 1/6), ('d', 1/6), ('e', 1/6), ('f', 1/6)]
+
     def tearDown(self):
         ...
 
@@ -52,10 +56,18 @@ class Greedy_test(unittest.TestCase):
     #############
 
     def test_huffman_wrapper(self):
-        cases = [([[('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11),
-                  ('p', 1 / 11)]], {'p': '100', 'm': '101', 'i': '11', 's': '0'}),
-                  ([[('a', 0.4), ('b', 0.3), ('c', 0.2),
-                  ('d', 0.1)]], {'a': '0', 'b': '11', 'c': '101', 'd': '100'})]
+        cases = [(
+                    [self.frequencies1, True], 
+                    {'p': '100', 'm': '101', 'i': '11', 's': '0'}
+                ),
+                (
+                    [self.frequencies2, True], 
+                    {'a': '0', 'b': '11', 'c': '101', 'd': '100'}
+                ),
+                (
+                    [self.frequencies3, True], 
+                    {'a': '00', 'b': '01', 'c': '110', 'd': '111', 'e': '100', 'f': '101'}
+                )]
         run_cases(self, cases, Greedy.huffman_wrapper)
 
     ############

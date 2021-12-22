@@ -169,7 +169,8 @@ def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
     # insert the new element in the list and remove the old ones
     new_frequencies = insert_sort(frequencies_l[2:], merged, 1)
 
-    return huffman_code(new_frequencies, frequencies_d)
+    huffman_codes = huffman_code(new_frequencies, frequencies_d)
+    return huffman_codes
 
 def prefix_free(huffman_codes: dict) -> bool:
     """
