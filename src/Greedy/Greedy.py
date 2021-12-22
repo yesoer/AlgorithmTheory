@@ -166,6 +166,23 @@ def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
 
     return huffman_code(new_frequencies, frequencies_d)
 
+def prefix_free(huffman_codes: dict) -> bool:
+    """
+    O(n²) Checks if the assigned huffman codes are prefix free/valid
+        Parameters:
+            huffman_codes(list): huffman codes, as { char: binary }
+            
+        Returns:
+            prefix_free(bool): whether all assigned codes are prefix free from eachother
+    """
+    for char, binary in huffman_codes.items():
+        for comp_char, comp_binary in huffman_codes.items():
+            if (char != comp_char and
+                    len(binary) < len(comp_binary) and
+                    binary == comp_binary[:len(binary)]):
+                return False
+    
+    return True
 
 def insert_sort(l: list, elem, key=None, order=lambda x, y: x >= y) -> list:
     """
