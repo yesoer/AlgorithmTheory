@@ -14,13 +14,14 @@ def interval_scheduling(intervals: list) -> list:
         Returns:
             timeline(list): list of chosen intervals
     """
-    intervals.sort(key=lambda x: x[1])  # sort by endtime
-    timeline = []
+    if intervals == []:
+        return []
 
-    for next_i in intervals:
-        if timeline == []:
-            timeline.append(next_i)
-        elif next_i[0] > timeline[-1][1]:  # no overlapping
+    intervals.sort(key=lambda x: x[1])  # sort by increasing endtime
+    timeline = [ intervals[0] ]
+
+    for next_i in intervals[1:]:
+        if next_i[0] > timeline[-1][1]:  # no overlapping
             timeline.append(next_i)
 
     return timeline
@@ -36,23 +37,23 @@ def interval_partitioning(intervals: list, check=False) -> list:
         Returns:
             timelines(list): list of chosen intervals, per machine
     """
+    if intervals == []:
+        return []
+
     intervals.sort(key=lambda x: x[1])  # sort by endtime
-    timelines = []
+    timelines = [ [intervals[0]] ]
 
-    for next_i in intervals:
-        if timelines == []:
+    for next_i in intervals[1:]:
+        appended = False
+        for t in range(
+                len(timelines)):  # can any existing timeline "run" this
+            if next_i[0] > timelines[t][-1][1]:  # no overlapping
+                timelines[t].append(next_i)
+                appended = True
+                break
+
+        if not appended:  # create a new timeline
             timelines.append([next_i])
-        else:
-            appended = False
-            for t in range(
-                    len(timelines)):  # can any existing timeline "run" this
-                if next_i[0] > timelines[t][-1][1]:  # no overlapping
-                    timelines[t].append(next_i)
-                    appended = True
-                    break
-
-            if not appended:  # create a new timeline
-                timelines.append([next_i])
 
     if check and len(timelines) != max_overlap(intervals):  # check correctness
         print("Something doesn't work like it's supposed to")
@@ -71,6 +72,7 @@ def max_overlap(intervals: list) -> int:
     """
     max_overlap = 0
     max_interval_end = max(intervals, key=lambda x: x[1])[1]
+
     for t in range(max_interval_end):
         overlap = 0
         for i in intervals:
@@ -96,15 +98,15 @@ def interval_lateness(intervals: list) -> list:
         Returns:
             timeline(int): list of chosen intervals
     """
+    if intervals == []:
+        return []
 
     # sort by deadline, only difference to usual scheduling
     intervals.sort(key=lambda x: x[2])
-    timeline = []
+    timeline = [ intervals[0] ]
 
-    for next_i in intervals:
-        if timeline == []:
-            timeline.append(next_i)
-        elif next_i[0] >= timeline[-1][1]:  # no overlapping
+    for next_i in intervals[1:]:
+        if next_i[0] >= timeline[-1][1]:  # no overlapping
             timeline.append(next_i)
 
     return timeline
