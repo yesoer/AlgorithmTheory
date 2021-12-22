@@ -4,14 +4,18 @@
 
 #### Interval Scheduling
 
+Upfront definitions :
+
+An interval, or job is a tuple (start, end) i.e. a job that starts at 1am and goes until 6am could be (1, 6).
+
+Intervals a=(a-start, a-end), b=(b-start, b-end) are overlapping when b-start < a-end (or a-start < b-end). So b can not start before a has ended and vice versa.
+
 **Problem :**
-From a number of jobs with start and end time choose a subset such that none are 
+From a number of jobs with start and end time choose a subset, such that none are 
 overlapping and as many are processed as possible.
 
 **Solution :**
 Choose the next interval to include by their endtime, earlier ones being the preference.
-Since the result should be none overlapping one should only consider those where the starting time is larger than the 
-endtime of the lastly chosen Interval.
 
 **Runtime Complexity :**
 The sorting takes O(n log n). After that we only need to iterate over this sorted list, which gives us O(n) for that part and thereby O(n log n) in total.

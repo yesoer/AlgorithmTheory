@@ -21,7 +21,7 @@ def interval_scheduling(intervals: list) -> list:
     timeline = [ intervals[0] ]
 
     for next_i in intervals[1:]:
-        if next_i[0] > timeline[-1][1]:  # no overlapping
+        if next_i[0] >= timeline[-1][1]:  # no overlapping
             timeline.append(next_i)
 
     return timeline
@@ -45,9 +45,10 @@ def interval_partitioning(intervals: list, check=False) -> list:
 
     for next_i in intervals[1:]:
         appended = False
-        for t in range(
-                len(timelines)):  # can any existing timeline "run" this
-            if next_i[0] > timelines[t][-1][1]:  # no overlapping
+
+        # try fitting next_i into existing timeline
+        for t in range(len(timelines)):
+            if next_i[0] >= timelines[t][-1][1]:  # no overlapping
                 timelines[t].append(next_i)
                 appended = True
                 break
