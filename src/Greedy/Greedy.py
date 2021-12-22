@@ -105,7 +105,7 @@ def max_overlap(intervals: list) -> int:
 test_frequencies = [('m', 2 / 11), ('i', 4 / 11), ('s', 4 / 11), ('p', 1 / 11)]
 
 
-def huffman_wrapper(frequencies: list) -> dict:
+def huffman_wrapper(frequencies: list, check=False) -> dict:
     """
     Wraps actual huffman_code() to get the dict for the input aswell
         Parameters:
@@ -125,8 +125,11 @@ def huffman_wrapper(frequencies: list) -> dict:
     frequencies_d = {f[0]: "" for f in frequencies}
 
     huffman_codes = huffman_code(frequencies, frequencies_d)
-    return huffman_codes
 
+    if check:
+        return None if not prefix_free(huffman_codes) else huffman_codes
+
+    return huffman_codes
 
 def huffman_code(frequencies_l: list, frequencies_d: dict) -> dict:
     """
