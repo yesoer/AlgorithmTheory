@@ -20,7 +20,7 @@ class Greedy_test(unittest.TestCase):
         run_cases(self, cases, Greedy.interval_scheduling)
 
     def test_interval_partitioning(self):
-        cases = [([[(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)]],
+        cases = [([[(1, 3), (0, 2), (2, 5), (3, 6), (4, 6)], True],
                   [[(0, 2), (3, 6)], [(1, 3), (4, 6)], [(2, 5)]])]
         run_cases(self, cases, Greedy.interval_partitioning)
 
