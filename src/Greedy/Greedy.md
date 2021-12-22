@@ -10,13 +10,16 @@ An interval, or job is a tuple (start, end) i.e. a job that starts at 1am and go
 
 Intervals a=(a-start, a-end), b=(b-start, b-end) are overlapping when b-start < a-end (or a-start < b-end). So b can not start before a has ended and vice versa.
 
+![Alt Text](./.resources/Interval_example.jpg "Interval Example")
+
 **Problem :**
 From a number of jobs with start and end time choose a subset, such that none are 
 overlapping and as many are processed as possible.
+From the example we would like to find [I3, I4, I5, I6].
 
 **Solution :**
 Choose the next interval to include by their endtime, earlier ones being the preference.
-
+ 
 **Runtime Complexity :**
 The sorting takes O(n log n). After that we only need to iterate over this sorted list, which gives us O(n) for that part and thereby O(n log n) in total.
 
@@ -24,6 +27,7 @@ The sorting takes O(n log n). After that we only need to iterate over this sorte
 
 **Problem :**
 Find the least number of timelines necessary such that no intervals overlap.
+From the example we would like to find [I3, I4, I5, I6], [I1] and [I2].
 
 **Solution :**
 It's equal to the max number of overlapping intervals.
@@ -97,6 +101,6 @@ Therefore over time all elements will be concatenated and the root of the tree s
 Assigning 1 and 0 to the two edges going down from each parent gives us paths of 1s and 0s to each leaf (= individual characters). Those paths are the prefix free codes.
 
 ![Huffman_Example](https://upload.wikimedia.org/wikipedia/commons/7/74/Huffman_coding_example.svg)
-By Alessio Damato - self-made  This W3C-unspecified vector image was created with Inkscape ., CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=2123492
+By Alessio Damato, https://commons.wikimedia.org/w/index.php?curid=2123492
 
 The code provided here will **not** produce this exact result because it has no clue about what path goes right and which goes left. It assigns 0 to the smaller frequency child and 1 to the other, which still yields a correct result though.
