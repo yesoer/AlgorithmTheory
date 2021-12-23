@@ -79,6 +79,9 @@ so basically there are just two steps being repeated :
 - choose a vertex (the one with the shortest distance, that hasn't been visited) which has now been visited
 - update it's neighbors distances, if possible
 
+**Runtime Complexity :**
+O((|V| + |E|) log |V|)
+
 #### Minimal Span Trees (MST)
 
 **Problem :**

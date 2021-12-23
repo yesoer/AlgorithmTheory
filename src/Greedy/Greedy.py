@@ -221,20 +221,20 @@ def insert_sort(l: list, elem, key=None, order=lambda x, y: x >= y) -> list:
 ############
 
 # edges : start, end, weight
-test_edges = [(1, 2, 0.5), (2, 4, 5), (2, 3, 2), (3, 5, 1), (1, 5, 10)]
-test_vertices = [1, 2, 3, 4, 5]
+test_edges = [(0, 1, 0.5), (1, 3, 5), (1, 2, 2), (2, 4, 1), (0, 4, 10)]
+test_vertices = [0, 1, 2, 3, 4]
 
 
 def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
     """
-    Helper to get graph (=dict) from input in O(n)
+    O(|V| + |E|) Helper to get graph (=dict) from input in O(n)
         Parameters:
             vertices(list): list of vertices
             edges(list): representing edges as [(start, end, ...)]
             directed(boolean): whether the graph is directed (default: false)
             
         Returns:
-            v_e_map(dict): graph as { vertice: [edge with vertice] }
+            v_e_map(dict): graph as { vertex: [edge with that vertex] }
     """
     v_e_map = {v: [] for v in vertices}
 
@@ -278,6 +278,11 @@ def dijkstra(graph: dict, start, end) -> (list, float):
             if curr == None or dist_s_t[curr] > dist_s_t[v]:
                 curr = v
         
+        # if this is true, end is visited and we definitely
+        # have found the shortest path
+        if curr == end:
+            break;
+
         to_process.remove(curr) # mark vertex as visited
 
         # for each neighbor that has not been visited
