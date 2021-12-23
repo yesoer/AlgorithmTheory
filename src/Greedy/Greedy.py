@@ -246,38 +246,59 @@ def graph_from_list(vertices: list, edges: list, directed=False) -> dict:
     return v_e_map
 
 
-def dijkstra(graph: dict, start, end) -> list:
+def dijkstra(graph: dict, start, end) -> (list, float):
     """
-    Dijkstra in O(|V| + |E|)
+    Dijkstra in O((|V| + |E|) log |V|)
         Parameters:
             graph(dict): graph as { vertice: [edge with vertice] }
             start(list): start vertex
             end(boolean): end vertex
             
         Returns:
-            cost_s_t(list): path from s to t as edges (start, end, weight)
+            path(list): path from s to t as edges (start, end, weight)
+            dist_s_t(float): distance for that path
     """
-    # paths from start to each other t with t being the keys
-    cost_s_t = {x: None if x != start else 0 for x in graph}
-    queue = [start]  # will hold the vertices at current and next level
+    # distance to each vertex t from vertex s
+    dist_s_t = [float("inf")] * len(graph.keys())
+    dist_s_t[start] = 0
 
-    while queue != []:
-        # pop next element
-        curr = queue[0]
-        queue = queue[1:]
+    # for each vertex, store the last one on the shortest path to them
+    prev_t = [None] * len(graph.keys())
+    
+    # unvisited vertices
+    to_process = {t for t in graph.keys()} 
+    
+    # traverse bfs like
+    while to_process:
 
-        # see if one of edges from this point onwards would be beneficial for the target
-        # if so the target now has a new value and should be evaluated
-        for e in graph[curr]:
-            if not cost_s_t[e[1]]:  # first value for this vertex
-                cost_s_t[e[1]] = e[2] if not cost_s_t[e[0]
-                                                      ] else cost_s_t[e[0]] + e[2]
-                queue.append(e[1])
-            elif cost_s_t[e[1]] > cost_s_t[e[0]] + e[2]:  # better than old value
-                cost_s_t[e[1]] = cost_s_t[e[0]] + e[2]
-                queue.append(e[1])
+        # coose next vertex by minimal distance
+        # out of unvisited ones
+        curr = None
+        for v in to_process:
+            if curr == None or dist_s_t[curr] > dist_s_t[v]:
+                curr = v
+        
+        to_process.remove(curr) # mark vertex as visited
 
-    return cost_s_t[end]
+        # for each neighbor that has not been visited
+        for edge in graph[curr]:
+            neighbor = edge[0] + edge[1] - curr
+            if neighbor in to_process:
+
+                # if the possible distance is less than before, update
+                new_dist = dist_s_t[curr] + edge[2]
+                if new_dist < dist_s_t[neighbor]:
+                    dist_s_t[neighbor] = new_dist
+                    prev_t[neighbor] = curr
+
+    # trace the path from end to start
+    path = []
+    prev = end
+    while prev != None:
+        path.append(prev)
+        prev = prev_t[prev]
+
+    return path, dist_s_t[end]
 
 # TODO : 'in' has O(n), use dicts for O(1)
 def mst_kruskal(vertices: list, edges: list) -> list:
