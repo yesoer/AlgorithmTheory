@@ -10,7 +10,7 @@ An interval, or job is a tuple (start, end) i.e. a job that starts at 1am and go
 
 Intervals a=(a-start, a-end), b=(b-start, b-end) are overlapping when b-start < a-end (or a-start < b-end). So b can not start before a has ended and vice versa.
 
-![Alt Text](./.resources/Interval_example.jpg "Interval Example")
+![Interval Example](./.resources/Interval_example.jpg "Interval Example")
 
 **Problem :**
 From a number of jobs with start and end time choose a subset, such that none are 
@@ -54,6 +54,8 @@ O(n log n)
 
 ### Graphs <hr />
 
+<img src="./.resources/Directed_Graph_example.png" alt="Directed Graph" style="width:200px;"/>
+
 #### Dijkstra
 
 **Problem :**
@@ -61,10 +63,21 @@ In a directed Graph, where edges have weights/lengths, find the shortest path
 (minimizing the summed up length/weight) between two vertices s and t.
 
 **Solution :**
-Use BFS (see below) to calculate all distances.
+Essentially BFS (Breadth First Search) is used to visit nodes layer by layer 
+(so all neighbourse of the start vertex, then all neighbours of those etc.) and incrementally calculate the shortest path to each node.
 
-BFS means visiting nodes layer by layer 
-(so all neighbourse of s, then all neighbours of those etc.)
+Let's go through the algorithm for the example graph.
+If 0 is chosen as the start and 4 is the target :
+- vertex 0 is assigned distance 0, everything else infinity
+- vertex 1 can clearly be reached in .5 and 4 in 10, so assign those distances for now becausethey are shorter than the assumed infinity
+- vertex 0 has been processed
+- as the next vertex choose the one with the shortest distance that hasn't been visited yet, which is 1, since distance .5 < 10 and every other vertex is infinitely far away
+- now it's clear vertex 2 could be reached within .5 + 2 and 3 in .5 + 5
+- the next chosen vertex is 2 which leads to a possible distance of 2.5 + 1 which is shorter than the previously assigned 10
+
+so basically there are just two steps being repeated :
+- choose a vertex (the one with the shortest distance, that hasn't been visited) which has now been visited
+- update it's neighbors distances, if possible
 
 #### Minimal Span Trees (MST)
 
