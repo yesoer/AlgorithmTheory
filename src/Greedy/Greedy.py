@@ -251,6 +251,7 @@ def dijkstra(graph: dict, start, end) -> (list, float):
     Dijkstra in O((|V| + |E|) log |V|)
         Parameters:
             graph(dict): graph as { vertice: [edge with vertice] }
+                         , where vertices have to be 0...n
             start(list): start vertex
             end(boolean): end vertex
             
@@ -285,7 +286,7 @@ def dijkstra(graph: dict, start, end) -> (list, float):
 
         to_process.remove(curr) # mark vertex as visited
 
-        # for each neighbor that has not been visited
+        # update distances between visited vertex and unvisited neighbors
         for edge in graph[curr]:
             neighbor = edge[0] + edge[1] - curr
             if neighbor in to_process:
@@ -363,56 +364,42 @@ def mst_kruskal(vertices: list, edges: list) -> list:
 
 def mst_prim(graph: dict) -> list:
     """
-    MST Prim
+    O((|V| + |E|) log |V|) MST Prim
         Parameters:
             graph(dict): graph as { vertice: [edge with vertice] }
             
         Returns:
             reduced_edges(list): list of edges (start, end, weight) for mst
     """
-    included_vertices = []
-    nonincluded_vertices = list(graph.keys())
+    # unvisited vertices
+    to_process = { t for t in graph.keys() }
+
+    # smallest distance known from chosen vertices to any other vertex t
+    dist_t = [(-1, -1, float('inf'))] * len(graph.keys())
+
     reduced_edges = []
+    while to_process:
 
-    # choose starting vertex ()which doesn't matter
-    included_vertices = [nonincluded_vertices[0]]
-    added_vertex = nonincluded_vertices[0]
-    nonincluded_vertices = nonincluded_vertices[1:]
-    possible_edges = []
-    while nonincluded_vertices != []:
+        # coose next vertex by minimal distance
+        # out of unvisited ones
+        curr = None
+        for v in to_process:
+            if curr == None or dist_t[curr][2] > dist_t[v][2]:
+                curr = v
 
-        # which are new possible edges :
-        # old ones and for newly connected x, E(x, y) or (y, x)
-        # (store position of y at index 3 after weight)
-        # cannot create circle
-        for e in graph[added_vertex]:
-            e0_in = e[0] in included_vertices
+        # track the chosen edges, but the first vertex isn't reached over an edge
+        if dist_t[curr][0] != -1:
+            reduced_edges.append(dist_t[curr])
 
-            if e0_in:
-                e += (1,)
-                possible_edges = insert_sort(possible_edges, e, key=2)
-            else:
-                e += (0,)
-                possible_edges = insert_sort(possible_edges, e, key=2)
+        to_process.remove(curr) # mark vertex as visited    
 
-        # remove lightest edges that create circles
-        def creates_circle(x, y):
-            return x in included_vertices and possible_edges[0][1] in included_vertices
+        # update distances between visited vertex and unvisited neighbors
+        for edge in graph[curr]:
+            neighbor = edge[0] + edge[1] - curr
+            if neighbor in to_process:
 
-        while creates_circle(possible_edges[0][0],
-                             possible_edges[0][1]):  # don't add circle
-            possible_edges = possible_edges[1:]
-            continue
-
-        chosen = possible_edges[0]  # choose "lightest" edge next
-        reduced_edges.append(chosen)
-
-        new_v = chosen[chosen[3]]
-        # target of lightest edge is now visited
-        included_vertices.append(new_v)
-        nonincluded_vertices.remove(new_v)
-        added_vertex = new_v
-
-        possible_edges = possible_edges[1:]
+                # if the found distance is less than before, update
+                if edge[2] < dist_t[neighbor][2]:
+                    dist_t[neighbor] = edge
 
     return reduced_edges
