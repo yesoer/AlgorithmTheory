@@ -94,8 +94,16 @@ Kruskal :
 Choose the edge with the least weight next, whilst not creating circles
 
 Prim :
-Start at some node and from that one forward always choose the connected edge 
-with the least weight.
+This algorithm starts at one vertex and expands from there, with each iteration "discovering" a new one by the shortest edge we know.
+
+Similar to Dijkstra initalize a dist value for each vertex with infinity but give one (the starting point) 0. Then until all vertices are covered :
+- pick the vertex with the smallest dist value that has not been covered yet
+- update adjacent vertices that can now be reached (but unlike dijkstra only take the visited edge into account !)
+
+The resulting Code is actually amazingly close to Dijkstra
+
+**Runtime Complexity :**
+O((|V| + |E|) log |V|)
 
 #### Huffman Codes
 
