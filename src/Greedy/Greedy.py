@@ -309,7 +309,7 @@ def dijkstra(graph: dict, start, end) -> (list, float):
 # TODO : 'in' has O(n), use dicts for O(1)
 def mst_kruskal(vertices: list, edges: list) -> list:
     """
-    MST Kruskal
+    O(E log V) MST Kruskal
         Parameters:
             vertices(list): list of vertices
             edges(list): list of edges (start, end, weight)

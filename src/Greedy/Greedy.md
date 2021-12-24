@@ -93,6 +93,9 @@ meaning to minimize the sum of weights of used edges.
 Kruskal :
 Choose the edge with the least weight next, whilst not creating circles
 
+**Runtime Complexity :**
+Runs in O(|E| log |V|) or O(|E| log |V|) because we first need to sort which is O(n log n) or O(|E| log E||) in this case. After that we iterate over the edges in O(|E|) and within each iterationlook for circles in O( log |V|) which precisely leads to a total complexity of : O(|E| log |E| + |E| log |V|).
+
 Prim :
 This algorithm starts at one vertex and expands from there, with each iteration "discovering" a new one by the shortest edge we know.
 
