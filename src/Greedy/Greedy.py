@@ -317,7 +317,7 @@ def mst_kruskal(vertices: list, edges: list) -> list:
         Returns:
             reduced_edges(list): list of edges (start, end, weight) for mst
     """
-    edges.sort(key=lambda x: x[2])  # sort by weight
+    edges.sort(key=lambda x: x[2])  # sort by increasing weight
     v_v_map = []  # list of connections
     reduced_edges = []  # list of not connected parts of the tree (=components)
 
