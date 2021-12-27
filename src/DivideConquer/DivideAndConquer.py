@@ -2,10 +2,15 @@ import copy
 
 test_nums = [2, 3, 4, 6, 5]
 
-# O(?)
-
-
 def inversions(nums: list) -> int:
+    """
+    Counts inversions in a list of numbers recursively (not optimized !)
+        Parameters:
+            nums(list): the number list to count the inversions on
+            
+        Returns:
+            inv_cnt(int): the total inversion count for the supplied number list
+    """
     # recursion anker
     if 1 == len(nums):
         return 0
@@ -27,10 +32,15 @@ def inversions(nums: list) -> int:
 
 test_points = [(1, 3), (1, 2), (3, 1), (2, 2), (5, 6)]
 
-# O(n (log n)²)
-
-
 def shortest_distance_wrapper(points: list) -> float:
+    """
+    Find shortest distance between n datapoints in O(n (log n)²)
+        Parameters:
+            points(list): the list of points as (x, y)
+            
+        Returns:
+            short_dist(float): the shortest distance value
+    """
     p_sort_y = copy.deepcopy(points)
     p_sort_y.sort(key=lambda p: p[1])
 
@@ -41,7 +51,15 @@ def shortest_distance_wrapper(points: list) -> float:
 
 
 def shortest_distance(p_sort_x: list, p_sort_y: list) -> float:
-
+    """
+    Recursive shortest-distance-finder
+        Parameters:
+            p_sort_x(list): the list of points (x, y), sorted by x
+            p_sort_y(list): the list of points (x, y), sorted by y
+            
+        Returns:
+            min_(float): the shortest distance value
+    """
     # recursion anker
     if 1 == len(p_sort_x):
         return float("inf")
@@ -76,17 +94,36 @@ def shortest_distance(p_sort_x: list, p_sort_y: list) -> float:
 
 
 def dist(p1: tuple, p2: tuple) -> float:
+    """
+    Helper for calculating euclidean distance between two points
+        Parameters:
+            p1(tuple): the first point as (x, y)
+            p2(tuple): the second point as (x, y)
+            
+        Returns:
+            return(float): the distance
+    """
     return ((p1[0] - p2[0]) ** 2 + (p1[1] - p2[1]) ** 2) ** 0.5
 
 
-def stripClosest(strip, size, d) -> float:
+def stripClosest(strip: list, size: int, d: float) -> float:
+    """
+    Find the shortest distance
+        Parameters:
+            strip(list): the stripnto look at 
+            size(int): the strips size
+            d(float): the current minimum distance
+            
+        Returns:
+            min_val(float): the maybe updated minimum distance
+    """
     # minimum distance as d
     min_val = d
 
     # Pick all points one by one and
     # try the next points till the difference
     # between y coordinates is smaller than d.
-    # This is a proven fact that this loop
+    # It is a proven fact that this loop
     # runs at most 6 times
     for i in range(size):
         j = i + 1
