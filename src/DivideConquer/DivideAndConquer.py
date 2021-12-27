@@ -16,13 +16,13 @@ def inversions(nums: list) -> int:
         return 0
 
     # split list
-    mid_i = int(len(nums) / 2)
+    mid_i = len(nums) // 2
     inv_cnt = 0
 
     # count inversions between lists
     for i in range(mid_i):
-        for j in range(mid_i):
-            if nums[i] > nums[mid_i + j]:
+        for j in range(mid_i, len(nums)):
+            if nums[i] > nums[j]:
                 inv_cnt += 1
 
     inv_cnt += inversions(nums[:mid_i])
