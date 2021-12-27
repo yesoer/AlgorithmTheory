@@ -47,7 +47,8 @@ def shortest_distance_wrapper(points: list) -> float:
     points.sort(key=lambda p: p[0])
     p_sort_x = points
 
-    return shortest_distance(p_sort_x, p_sort_y)
+    short_dist = shortest_distance(p_sort_x, p_sort_y)
+    return short_dist
 
 
 def shortest_distance(p_sort_x: list, p_sort_y: list) -> float:

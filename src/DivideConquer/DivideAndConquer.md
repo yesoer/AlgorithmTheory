@@ -22,8 +22,7 @@ where
 #### Counting Inversions <hr />
 
 **Problem :**
-In an unsorted list, determine the number of pairs of elements, that are in 
-the wrong order (doesn't have to be numerical order).
+In an unsorted list, determine the number of pairs of elements, that are inverted, meaning a[i] > a[j] but i < j.
 
 **Solution :**
 Split the list into two of the same size. The searched number is the inversions in 
@@ -35,6 +34,9 @@ can be determined in linear time.
 The latter is because for example : 1 3 8 21 | 5 10 30 35
 one knows since 8 and 5 is an inversion between lists, everything in partial list a
 after 8 is an inversion between lists aswell (in this case just 21 and 5). 
+
+**Runtime Complexity :**
+A runtime of O(n log n) can be achieved with the optimization
 
 #### Closest Pair <hr />
 
@@ -52,7 +54,11 @@ y coordinate.
 That way a point has to only be compared to the nearest quadrants.
 Those can at most inhabit 6 points (if their were more, d were smaller). 
 
-runs in **O(n (log n)²).**
+![Closest Pair](./.resources/Shortest_distance.png "Closest Pair")
+
+**Runtime Complexity :**
+Runs in O(n (log n)²).
+
 #### Matrix Multiplication <hr />
 
 **Problem :**
