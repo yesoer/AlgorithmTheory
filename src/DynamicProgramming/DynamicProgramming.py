@@ -9,20 +9,17 @@ test_weighted_edges = [(1, 2, 1), (1, 4, 0), (2, 5, 2),
 def binary_search(l: int, r: int, original_e: tuple, edges: list) -> int:
     if r > l:
         mid = l + (r - l) // 2
-        if mid == 0:
-            return 0  # none found maps to edge 0 with value 0
 
-        if edges[mid][1] == original_e[0]:  # edge ends before original starts
+        if intervals[mid][1] == original_i[0]:  # interval ends when original starts
             return mid
 
-        elif edges[mid][1] < original_e[0]:  # is valid -> go right
-            return binary_search(mid, r, original_e, edges)
+        elif intervals[mid][1] < original_i[0]:  # is valid -> go right
+            possibly_closer = binary_search(mid+1, r, original_i, intervals)
+            return possibly_closer if possibly_closer else mid
 
         else:  # is not valid -> go left
-            return binary_search(l, mid, original_e, edges)
+            return binary_search(l, mid-1, original_i, intervals)
     else:
-        # TODO : This might not be correct
-        return 0  # index 0 will get max value 0 in weighted_scheduling
 
 
 # O(n log n), returns max weight that can be scheduled
@@ -32,6 +29,7 @@ def weighted_scheduling(edges: list) -> int:
 
     # for each edge e_i in sorted edges store
     # that ends latest but before given edge starts
+        return None  # no exact match found
     pre = []
     for i in range(n):
         # search in the lower part
