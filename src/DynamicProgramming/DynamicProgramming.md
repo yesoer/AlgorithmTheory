@@ -1,6 +1,6 @@
 ## Dynamic Programming
 
-Creating of a efficient table that stores partial solutions.
+Creating of an efficient table that stores partial solutions.
 Often implemented with bottom up recursion.
 
 #### Weighted Interval Scheduling
@@ -29,6 +29,7 @@ you choose the better (determined by greater value) of two options :
 7   M[j] = max{weight(j) + M[p(j)], M[j-1]} # M[j] = OPT(j)
 ```
 
+**Runtime Complexity :**
 p(j) could be calculated with a binary search O(log n) for each interval, giving that step O(n log n) which leaves the algorithm at **O(n log n).**
 
 #### Knapsack
@@ -48,6 +49,8 @@ again two cases :
 
 But in the code you wil also need to implement a continue for the loop
 in case w_i is larger than the remaing w, so it can't go negative.
+
+**Runtime Complexity :**
 The runtime **O(n * W)** is proportional to the table size and is in NP !.
 
 #### Longest Common Subsequence
@@ -67,6 +70,7 @@ Go through the strings backwards :
 - if both characters are the same, add it to the solution and move further on both lists
 - if they are different move further on both lists but in seperate recursions and  take the better result
 
+**Runtime Complexity :**
 Again runtime is equal to table size, so **O(n * m).**
 
 
@@ -98,6 +102,7 @@ cases :
 6   foreach(v, w) in E: M[i, y] = min{M[i,y], M[i-1, w] + c_vw} # with c_vw being the costs for that edge
 ```
 
+**Runtime Complexity :**
 Runs in **O(n * m)** with **O(n + m)** space.
 
 #### Detection of negative circles
@@ -118,8 +123,10 @@ For graph with n vertices:
 ```
 
 , which is the same as running Bellman-Ford one iteratio n longer.
+
+**Runtime Complexity :**
 Hence a time complexity of **O(n * m)** is achieved.
 
-Real world application :
+**Real world application :**
 Take a directed, weighted graph representing the trading market for currencies like euro, dollar etc. at a certain point in time, with them being nodes and being connected by edges which represent the trading of one to another, where the weight of said edge is the exchange rate.
 If you found a negative circle in this graph you could just trade up your money. 
