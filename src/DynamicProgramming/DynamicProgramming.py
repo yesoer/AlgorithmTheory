@@ -51,10 +51,11 @@ def weighted_scheduling(intervals: list) -> int:
         map_to = binary_search(0, i, intervals[i], intervals)
         pre.append(map_to)
 
-    M = [0]  # partial solutions table
+    M = [intervals[0][2]]  # partial solutions table
     for j in range(1, n):
-        take_edge = edges[j][2] + M[pre[j - 1]]
-        dont_take_edge = M[j - 1]
-        M.append(max(take_edge, dont_take_edge))  # implements the OPT function
+        pre_j = M[pre[j]] if pre[j] != None else 0 # 0 index in M always results in 0
+        take_j = intervals[j][2] + pre_j
+        dont_take_j = M[j-1]
+        M.append(max(take_j, dont_take_j))  # implements the OPT function
 
     return M[-1]
