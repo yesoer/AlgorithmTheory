@@ -29,20 +29,26 @@ def binary_search(l: int, r: int, original_i: tuple, intervals: list) -> int:
         else:  # is not valid -> go left
             return binary_search(l, mid-1, original_i, intervals)
     else:
-
-
-# O(n log n), returns max weight that can be scheduled
-def weighted_scheduling(edges: list) -> int:
-    edges.sort(key=lambda x: x[1])  # sort by endtime
-    n = len(edges)
-
-    # for each edge e_i in sorted edges store
-    # that ends latest but before given edge starts
         return None  # no exact match found
+
+def weighted_scheduling(intervals: list) -> int:
+    """
+    O(n log n) scheduling weighted intervals
+        Parameters:
+            intervals(list): intervals to schedule as (start, end, weight)
+            
+        Returns:
+            M[-1](int): max weight that can be scheduled
+    """
+    intervals.sort(key=lambda x: x[1])  # sort by endtime
+    n = len(intervals)
+
+    # for each interval intervals[i] store
+    # that ends latest but before given one starts
     pre = []
     for i in range(n):
         # search in the lower part
-        map_to = binary_search(0, i, edges[i], edges)
+        map_to = binary_search(0, i, intervals[i], intervals)
         pre.append(map_to)
 
     M = [0]  # partial solutions table
