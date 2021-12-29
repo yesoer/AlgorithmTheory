@@ -38,7 +38,8 @@ p(j) could be calculated with a binary search O(log n) for each interval, giving
 
 #### Knapsack
 
-!["Knapsack Example"](./.resources/Knapsack_example.png "Knapsack Example")
+<img src="./.resources/Knapsack_example.png" alt="Knapsack Exampleh" style="width:200px;"/>
+
 Source: Wikipedia, Author: Dake
 
 **Problem :**
@@ -74,16 +75,20 @@ Prefix - The ith prefix of x is the the first i characters of x
 Find the longest char list that is a subsequence for two input strings 
 A and B
 
+So for two strings "AGGATAP" and "GXAYTUWAP" we want to find "GATAP".
+
 **Solution :**
 Go through the strings backwards :
 - if both characters are the same, add it to the solution and move further on both lists
-- if they are different move further on both lists but in seperate recursions and  take the better result
+- if they are different move further on both lists but in seperate recursions and take the better result
 
 **Runtime Complexity :**
 Again runtime is equal to table size, so **O(n * m).**
 
 
 #### Shortest Paths (revisited)
+
+<img src="./.resources/Directed_Graph_example.png" alt="Directed Graph" style="width:200px;"/>
 
 **Problem :**
 Again shortest path in a graph, from s to t.
