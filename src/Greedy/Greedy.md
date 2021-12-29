@@ -15,7 +15,7 @@ Intervals a=(a-start, a-end), b=(b-start, b-end) are overlapping when b-start < 
 **Problem :**
 From a number of jobs with start and end time choose a subset, such that none are 
 overlapping and as many are processed as possible.
-From the example we would like to find [I3, I4, I5, I6].
+From the example we would like to find [I1, I4, I5, I6].
 
 **Solution :**
 Choose the next interval to include by their endtime, earlier ones being the preference.
@@ -27,7 +27,7 @@ The sorting takes O(n log n). After that we only need to iterate over this sorte
 
 **Problem :**
 Find the least number of timelines necessary such that no intervals overlap.
-From the example we would like to find [I3, I4, I5, I6], [I1] and [I2].
+From the example we would like to find [I1, I4, I5, I6], [I3] and [I2].
 
 **Solution :**
 It's equal to the max number of overlapping intervals.

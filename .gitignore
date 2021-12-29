@@ -5,3 +5,6 @@
 graph.gv
 graph.gv.pdf
 .~lock.graph.gv.pdf#
+
+# MacOS related
+.DS_Store
