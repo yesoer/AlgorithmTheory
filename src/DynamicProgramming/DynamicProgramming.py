@@ -38,7 +38,7 @@ def weighted_scheduling(intervals: list) -> int:
             intervals(list): intervals to schedule as (start, end, weight)
             
         Returns:
-            M[-1](int): max weight that can be scheduled
+            max_weight(int): max weight that can be scheduled
     """
     intervals.sort(key=lambda x: x[1])  # sort by endtime
     n = len(intervals)
@@ -51,11 +51,15 @@ def weighted_scheduling(intervals: list) -> int:
         map_to = binary_search(0, i, intervals[i], intervals)
         pre.append(map_to)
 
-    M = [intervals[0][2]]  # partial solutions table
-    for j in range(1, n):
-        pre_j = M[pre[j]] if pre[j] != None else 0 # 0 index in M always results in 0
-        take_j = intervals[j][2] + pre_j
-        dont_take_j = M[j-1]
+    M = []  # partial solutions table
+    for j in range(0, n):
+        # get the most weight scheduled for the latest interval before j
+        pre_j = M[pre[j]] if pre[j] != None else 0
+
+        take_j = intervals[j][2] + pre_j # weight if j is included
+        dont_take_j = M[j-1] if j-1 > 0 and j-1 < len(M) else 0 # if j is not included
+
         M.append(max(take_j, dont_take_j))  # implements the OPT function
 
-    return M[-1]
+    max_weight = M[-1] if len(M) > 0 else 0
+    return max_weight
