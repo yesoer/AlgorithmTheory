@@ -5,8 +5,12 @@ Often implemented with bottom up recursion.
 
 #### Weighted Interval Scheduling
 
+![Weighted Interval Example](./.resources/Weighted_interval_example.jpg "Weighted Interval Example")
+
 **Problem :**
 Interval schedueling, but with weights that are supposed to be maximized.
+
+From the example [I3, I4, I5, I6] should be chosen for a scheduled weight of 13. Reminder : normal scheduling would be by the earliest start time and result in [I1, I4, I5, I6], which would only result in a weight of 10 though.
 
 **Define :**
 p(j) = interval i with largest endtime, that's still smaller or equal to 
