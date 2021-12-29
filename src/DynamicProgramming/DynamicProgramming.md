@@ -38,9 +38,14 @@ p(j) could be calculated with a binary search O(log n) for each interval, giving
 
 #### Knapsack
 
+!["Knapsack Example"](./.resources/Knapsack_example.png "Knapsack Example")
+Source: Wikipedia, Author: Dake
+
 **Problem :**
 Objects i with weight w_i and value v_i, aswell as a maximum weight W.
 Maximize the total value whilst ceeping the total weight under W.
+
+From the example the grey, blue, orange and yellow box would be chosen, so the total weight would be 8kg < 15kg with a value of 15$.
 
 **Define :**
 OPT(i, w) = the optimum for intervalls 1, 2 .., i with a max weight of w.
