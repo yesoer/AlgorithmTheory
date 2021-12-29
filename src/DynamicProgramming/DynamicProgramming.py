@@ -57,7 +57,8 @@ def weighted_scheduling(intervals: list) -> int:
         pre_j = M[pre[j]] if pre[j] != None else 0
 
         take_j = intervals[j][2] + pre_j # weight if j is included
-        dont_take_j = M[j-1] if j-1 > 0 and j-1 < len(M) else 0 # if j is not included
+        valid_index = j-1 > 0 and j-1 < len(M)
+        dont_take_j = M[j-1] if valid_index else 0 # if j is not included
 
         M.append(max(take_j, dont_take_j))  # implements the OPT function
 
